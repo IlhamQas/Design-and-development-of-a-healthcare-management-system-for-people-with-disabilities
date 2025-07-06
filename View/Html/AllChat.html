@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+<link rel="stylesheet" href="../assets/css/AllChat.css">
+  <title>SkyMED Chat</title>
+
+</head>
+<body>
+  <div class="sidebar" role="navigation" aria-label="User List">
+    <h2>My Contact</h2>
+    <div id="user-list" tabindex="0">
+    </div>
+  </div>
+
+  <div class="chat-area" role="main" aria-label="Chat area">
+    <div class="chat-header" id="chat-header" onclick="goToProfile()" style="cursor: pointer;">
+      <img id="chat-header-img" src="https://ui-avatars.com/api/?name=User+1&size=48" alt="User Image" />
+      <span id="chat-header-name">Select a contact</span>
+    </div>
+    <div class="chat-box" id="chat-box" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <div class="input-container">
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Write a message..."
+        autocomplete="off"
+        aria-label="Type your message"/>
+
+        <label for="media-input" id="media-label" title="Attach image or video">
+          <i class="fas fa-paperclip"></i>
+        </label>
+<input type="file" id="media-input" accept="image/*,video/*" name="media" />
+      <button id="send-btn" aria-label="Send message">&#10148;</button>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="../api/AllChat.js"></script>
+</body>
+</html>
+

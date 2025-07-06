@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guardian Schedule Request</title>
+  <link rel="stylesheet" href="../assets/css/SchedulessPage(Gurdian).css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+  
+  <div class="container">
+    <h2>My Weekly Schedule </h2>
+    <form id="scheduleForm">
+      <button type="submit">Submit Request</button>
+    </form>
+    <div id="message"></div>
+    <button id="cancelRequestBtn" class="btn" style="display:none; background-color: red;">Cancel Schedule Request</button>
+    <div id="scheduleTable" style="margin-top: 30px;"></div>
+  </div>
+  <div class="feature-buttons">
+    <button onclick="window.location.href ='../Html/previosSessiosn(Guardian).html'" class="feature-button">View Previous Sessions</button>
+    <button onclick="viewTherapyPlan()" class="feature-button">View Therapy Plan</button>
+    <button onclick="window.location.href ='../Html/ImprovmentLevel(Guardian).html'" class="feature-button">View Improvement Level</button>
+  </div>
+
+  <div id="scheduleModal" class="modal">
+    <div class="modal-content">
+      <h4>Select New Day and Time</h4>
+      <form id="scheduleFormModal">
+        <label for="day">Select Day:</label>
+        <select id="day" name="day">
+          <option value="Sunday">Sunday</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+        </select>
+
+        <label for="time">Select Time:</label>
+        <select id="time" name="time">
+          <option value="09:00">9:00 AM</option>
+          <option value="09:30">9:30 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="10:30">10:30 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="11:30">11:30 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="12:30">12:30 PM</option>
+          <option value="13:00">1:00 PM</option>
+          <option value="13:30">1:30 PM</option>
+          <option value="14:00">2:00 PM</option>
+          <option value="14:30">2:30 PM</option>
+          <option value="15:00">3:00 PM</option>
+        </select>
+
+        <button type="submit">Save</button>
+        <button type="button" onclick="closeModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
+
+  <script src="../api/ScheduesPage(guardian).js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

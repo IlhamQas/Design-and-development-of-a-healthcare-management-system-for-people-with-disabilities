@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/DashboardPage.css">
+    <link rel="stylesheet" href="../assets/css/font.css">
+   
+</head>
+
+<style>
+    .card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    max-width: 400px;
+    background-color: white;
+}
+
+a.button {
+    text-decoration: none;
+
+}
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .cardss {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .cardss h2 {
+      margin: 0 0 10px;
+      font-size: 1.3rem;
+      color: #333;
+    }
+    .cardss p {
+      font-size: 2rem;
+      margin: 0;
+      color: #007BFF;
+      font-weight: bold;
+    }
+
+    .role-list {
+      margin-top: 10px;
+      padding-left: 15px;
+    }
+    .role-list li {
+      font-size: 1rem;
+      margin: 4px 0;
+      color: #555;
+    }
+    .error {
+      color: red;
+      margin-top: 20px;
+    }
+
+    #systemChart {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+.highlight {
+      font-size: 2rem;
+      color: #27ae60;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+</style>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+    <div id="loading-screen">
+        <div class="spinner-wrapper">
+          <div class="spinner"></div>
+          <img src="../assets/images/med 1.png" alt="Sky Medical Logo" id="loading-logo">
+          
+        </div>
+      </div>
+    
+    <div class="sidebar" id="sidebar">
+        <h3 style="padding-left: 12px;color: rgba(255, 255, 255, 0.822);"> SKY MEDICAL - ADMIN</h3>
+        <img id="profileDropdownImg" class="profile-picture" src="../assets/images/defultAdminImg.avif" alt="Admin Profile Picture" >
+        <ul style="color: gray;"> Dashboard
+            <a href="#"><i class="fa fa-home"></i> Home</a>
+            <a href="../Html/UserprofilePage.html"><i class="fa-solid fa-user-shield"></i> Admin Profile</a>
+        </ul>
+        <ul>User Management
+              <a  href="CreateAccounts.html"><i class="fa-solid fa-user-plus"></i>  Add New User</a>
+                <a  href="../Html/UserListPage.html"><i class="fa-solid fa-users"></i> Users List</a> 
+        </ul>
+        
+         <ul>Appointment Management
+            <a href="../Html/viewSchedules.html"><i class="fa-regular fa-calendar-check"></i> Manage Schedules</a>
+            <a href="AppointmentRequest.html"><i class="fa-solid fa-user-plus"></i>  Appointments Requests</a>
+            <a href="../Html/AddSchedule.html"><i class="fa-solid fa-trash"></i> Auto schedule for specialist </a>
+        </ul>
+
+        <ul>departments 
+            <a href="../Html/DepartmentList.html"><i class="fa-solid fa-pen"></i> Manage Department </a>
+            <a  href="../Html/addDepartment(Admin).html"><i class="fa-regular fa-calendar-check"></i> Add New Department</a>
+        </ul>
+
+        <ul>Communication & Notifications
+            <a href="../Html/AllChat.html"><i class="fa-solid fa-user-doctor"></i> My Contact</a>
+            <a href="../Html/NotificationsManagement(Admin).html"><i class="fa-solid fa-bell"></i> Manage Notifications</a>
+        </ul>
+
+        <ul>Financial Records
+            <a href="../Html/cheakPaymentRecord.html"><i class="fa-solid fa-file-invoice-dollar"></i> View Payment Record</a>
+            <a href="../Html/PaymentRecord.html"><i class="fa-solid fa-chart-pie"></i> Manage Gurdian balance</a>
+            <a href="../Html/SalesAnalytics.html"><i class="fas fa-chart-line"></i> Sales Analytics</a>
+        </ul>
+    
+        <ul>System Management
+            <a href="../Html/SystemManagementPage.html"><i class="fa-solid fa-cogs"></i> System Settings</a>
+        </ul>
+        
+        
+        <ul style="font-size: smaller;">
+            @2025 All rights reserved.
+        </ul>
+
+
+        <ul style="font-size: smaller;">
+            <a href="../HomePage.html"><img style="width: 150px; height: 70px;" src="../assets/images/med 1.png"></a>
+         </ul>
+
+    </div>
+    <div class="main-content" id="main-content">
+        <div class="navbar">
+            <div class="search-bar"> <i class="fa fa-search"></i> 
+                <input  id="dashboardSearchInput" type="text" placeholder="Search...">
+            </div>
+            <div id="google_translate_element"></div>
+            <div class="user-icons">
+                <div class="dropdown">
+                    <i id="message" class="fa-solid fa-comment"onclick="toggleDropdown('messagesDropdown');"></i>
+                    <div  class="messageDot"></div>
+                    <div id="messagesDropdown" class="dropdown-content messagesDropdown"></div>
+                </div>
+               
+                <div class="dropdown">
+                    <img id="profile-picture" src="../assets/images/defultAdminImg.avif" alt="Admin Profile Picture" onclick="toggleDropdown('profileDropdown')">
+                    <div id="profileDropdown" class="dropdown-content">
+                        <p><a href="../Html/UserprofilePage.html"><i class="fa-solid fa-user"></i> View Profile</a></p>
+                        <p><a href="#"><i class="fa fa-cogs"></i> Settings</a></p>
+                        <p onclick="logout()"><a href="#"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+        
+            <h4 style="padding-bottom: 50px;" id="userName">Welcome Back, Admin!</h4>
+            <div class="dashboard-section">
+                <div class="card">
+                    <h2>System Performance</h2>
+                    <div id="stats">Loading system stats...</div>
+                    <canvas id="systemChart" width="250" height="250" style="max-width: 100%;"></canvas>
+                 </div>   
+                
+                 <div >
+                <div class="stats-container" id="stats-container">
+                </div>
+                <div class="error" id="error"></div>
+                 </div>
+
+  
+
+                <div class="card">
+
+                    <h3>Total Revenue</h3>
+                    <div style="margin-bottom: 100px; margin-top: 20px; border-bottom: 1px solid rgba(128, 128, 128, 0.377);" id="totalRevenue" class="highlight">Loading...</div> 
+
+                     
+                      <h3>Top Selling Products</h3>
+                       <table  style="margin-bottom: 100px;" id="topProductsTable">
+                       
+                          <thead>
+                          <tr>
+                          <th>#</th>
+                          <th>Product Name</th>
+                          <th>Quantity Sold</th>
+                          </tr>
+                          </thead>
+                          <tbody></tbody>
+                         </table>
+                         <p style="border-bottom: 1px solid rgba(128, 128, 128, 0.377);"></p>
+
+                         <h3>Monthly Revenue</h3>
+                         <canvas  id="monthlyChart" height="120"></canvas>
+                </div>
+            
+                <div class="card" data-title="User Management">
+                  <h3>User Management</h3>
+                  <p>Easily add, edit, or remove user accounts with full control over user access and information.</p>
+                  <a class="button btn btn-info" href="../Html/UserListPage.html">Manage Users</a>
+                </div>
+              
+                <div class="card" data-title="Scheduled Appointments">
+                  <h3>Scheduled Appointments</h3>
+                  <p>Access and update all scheduled appointments with clear and organized scheduling tools.</p>
+                  <a class="button btn btn-info" href="../Html/viewSchedules.html">Manage Appointments</a>
+                </div>
+              
+                <div class="card" data-title="System Settings">
+                  <h3>System Settings</h3>
+                  <p>Monitor system performance, manage hardware status, and configure key security settings.</p>
+                  <a class="button btn btn-info" href="../Html/SystemManagementPage.html">Manage System</a>
+                </div>
+              
+                <div class="card" data-title="Notification Settings">
+                  <h3>Notification Settings</h3>
+                  <p>Create, edit, or remove user notifications to ensure timely and relevant system alerts.</p>
+                  <a class="button btn btn-info" href="../Html/NotificationsManagement(Admin).html">Manage Notifications</a>
+                </div>
+              
+                <div class="card" data-title="Financial Records">
+                  <h3>Financial Records</h3>
+                  <p>Review, update, and track all financial transactions and payment records efficiently.</p>
+                  <a class="button btn btn-info" href="../Html/cheakPaymentRecord.html">View Financial Records</a>
+                </div>
+              
+                <div class="card" data-title="Appointment Requests">
+                  <h3>Appointment Requests</h3>
+                  <p>Review and approve pending appointment requests, ensuring proper scheduling and follow-up.</p>
+                  <a class="button btn btn-info" href="../Html/AppointmentRequest.html">Review Requests</a>
+                </div>
+                
+                
+            </div>
+        </div>
+
+    </div>
+    
+  <script src="../api/Dashbord(Admin).js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+  <script src="../assets/js/logout.js"></script>
+ <script src="../assets/js/DashbordPage(Admin).js"></script>
+ <script src="../api/message.js"></script>
+ 
+ 
+ 
+   
+</body>
+</html>

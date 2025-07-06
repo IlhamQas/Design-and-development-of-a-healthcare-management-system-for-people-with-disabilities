@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard page</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../assets/css/DashboardPage.css">
+        <link rel="stylesheet" href="../assets/css/font.css">
+
+    </head>
+    <style>
+        .card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  padding: 20px 25px;
+}
+.card h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #2980b9;
+}
+.highlight {
+  font-size: 2rem;
+  color: #27ae60;
+  margin-top: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+th {
+  background-color: #3498db;
+  color: white;
+}
+
+    </style>
+    <body>
+  
+        <div class="sidebar" id="AdminSidebar">
+            <h3 style="padding-left: 12px;color: rgba(255, 255, 255, 0.822);">
+                SKY MEDICAL</h3>
+
+          
+            <i style="position: absolute; top: 12px; right: 10px;"
+                id="removeSidebar" class="fa-solid fa-xmark"
+                onclick="toggleSidebar()"></i>
+            <img id="profileImg" class="profile-picture"
+                src="../assets/images/defultAdminImg.avif"
+                alt="Admin Profile Picture">
+            <ul style="color: gray;"> Dashboard
+                <a href="../Html/DashboardPage(Marketagent).html"><i class="fa fa-home"></i> Home</a>
+                <a href="../Html/UserprofilePage.html"><i
+                        class="fa-solid fa-user-shield"></i> User Profile</a>
+            </ul>
+            <ul>User Management
+                <a href="../Html/addproduct.html"><i class="fa-solid fa-users"></i> Add new Product</a>
+                <a href="../Html/ProductList.html"><i class="fa-solid fa-users"></i> My Product List</a>
+                <a href="../Html/shop.html"><i class="fa-solid fa-user-pen"></i> View Shop</a>
+                <a href="../Html/ShopReq(marketAgent).html"><i class="fa-solid fa-user-pen"></i> my Shop Request</a>
+            </ul>
+           
+            <ul>Communication
+                <a href="../Html/AllChat.html"><i class="fa-solid fa-user-doctor"></i>My Contact</a>
+                <a href="../Html/chatSupport.html?to=manager"><i class="fa-solid fa-headset"></i> Manger </a>
+                <a href="../Html/chatSupport.html?to=admin"><i class="fa-solid fa-link"></i> Support</a>
+            </ul>
+
+            <ul style="font-size: smaller;">
+                @2025 All rights reserved.
+            </ul>
+
+            
+            <ul style="font-size: smaller;">
+                <a href="../HomePage.html"><img style="width: 150px; height: 70px;" src="../assets/images/med 1.png"></a>
+             </ul>
+        </div>
+
+        <div class="main-content" id="main-content">
+            <div class="navbar">
+
+                <div  class="search-bar"> <i class="fa fa-search"></i>
+                    <input  type="text" placeholder="Search...">
+                </div>
+
+                <div class="user-icons">
+                    <div class="dropdown">
+                        <i id="notifIcon" class="fa fa-bell" onclick="toggleDropdown('notificationsDropdown'); markAsRead();"></i>
+                        <div class="redDot"></div>
+                        <div id="notificationsDropdown"  class="dropdown-content notificationsDropdown">
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <i class="fa-solid fa-comment"
+                            onclick="toggleDropdown('messagesDropdown')"></i>
+                        <div id="messagesDropdown" class="dropdown-content">
+                            <p>No new messages</p>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <img id="profileDropdownImg" src="../assets/images/defultUserProfilepic.jpg"
+                            alt="Profile Picture"
+                            onclick="toggleDropdown('profileDropdown')">
+                        <div id="profileDropdown" class="dropdown-content">
+                            <p><a href="../Html/UserprofilePage.html"><i
+                                        style="font-size: 16px; padding-right: 20px;"
+                                        class="fa-solid fa-user"></i> View
+                                    Profile</a></p>
+                            <p><a href="../Html/AccountSetting.html"><i
+                                        style="font-size: 18px; padding-right: 20px;"
+                                        class="fa fa-cogs"></i> Settings</a></p>
+                            <p onclick="logout()"><a href="#"><i
+                                        style="font-size: 18px; padding-right: 20px;"
+                                        class="fa-solid fa-right-from-bracket"></i>
+                                    Logout</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+                <h4 id="userName">Welcome Back!</h4>
+            </div>
+
+            <div class="container mt-5">
+                <h1 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Sales Analytics</h1>
+              
+                <div class="card">
+                  <h2>Total Revenue</h2>
+                  <div id="totalRevenue" class="highlight">Loading...</div>
+                </div>
+              
+                <div class="card">
+                  <h2>Top Selling Products</h2>
+                  <table id="topProductsTable">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Quantity Sold</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              
+                <div class="card">
+                  <h2>Monthly Revenue</h2>
+                  <canvas id="monthlyChart" height="120"></canvas>
+                </div>
+              </div>
+              
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+             const user = JSON.parse(localStorage.getItem('user'));
+              const username =document.getElementById('userName').innerHTML=`Welcome Back, ${user.name}!`;
+              document.getElementById('profileDropdownImg').src=user.image;
+              document.getElementById('profileImg').src=user.image;
+
+  async function loadTotalSales() {
+    const res = await fetch('http://localhost:4000/api/v1/sale/all', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    const data = await res.json();
+    document.getElementById("totalRevenue").textContent = `₪${data.totalRevenue.toFixed(2)}`;
+  }
+
+  async function loadTopSellingProducts() {
+    const res = await fetch('http://localhost:4000/api/v1/sale/getTopSellingProducts', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    const data = await res.json();
+
+    const tbody = document.querySelector("#topProductsTable tbody");
+    tbody.innerHTML = "";
+    data.topProducts.forEach((prod, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${prod.productDetails.name}</td>
+        <td>${prod.totalSold}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  async function loadMonthlyRevenue() {
+    const res = await fetch('http://localhost:4000/api/v1/sale/getMonthlyRevenue', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
+    const data = await res.json();
+
+    const labels = data.monthlyRevenue.map(item => `${item._id.month}/${item._id.year}`);
+    const revenues = data.monthlyRevenue.map(item => item.totalRevenue);
+
+    new Chart(document.getElementById("monthlyChart"), {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Revenue",
+          data: revenues,
+          backgroundColor: "#2980b9"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+
+  loadTotalSales();
+  loadTopSellingProducts();
+  loadMonthlyRevenue();
+
+
+      
+</script>
+
+        <script src="../assets/js/logout.js"></script>
+        <script src="../assets/js/DashbordPage.js"></script>
+        <script src="../api/notification.js"></script>
+        
+    </body>
+</html>

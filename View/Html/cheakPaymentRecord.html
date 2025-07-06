@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Child Payment Record</title>
+  <link rel="stylesheet" href="../assets/css/paymentRecord.css">
+</head>
+<body>
+  <h1>View Payment Record</h1>
+
+  <label for="childId">Enter Child ID:</label>
+  <input type="text" id="childId" placeholder="Enter ID" />
+  <button id="searchButton">Search</button>
+  <table id="paymentTable">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>User ID</th>
+        <th>Amount</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>balanceAfterTransaction</th>
+    
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  
+  <script src="../api/paymentRecord.js"></script>
+</body>
+</html>

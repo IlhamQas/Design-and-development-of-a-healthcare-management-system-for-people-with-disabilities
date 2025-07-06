@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/cheakout.css">
+</head>
+<body>
+    <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">🛒 Checkout</h2>
+
+        <div class="cart-box">
+            <h3>Your Cart</h3>
+            <ul id="cart-items" class="list-group mt-3"></ul>
+            <div class="mt-4">
+                <strong>Total: <span id="cart-total">₪0.00</span></strong>
+            </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <form id="checkout-form">
+            <div class="row">
+                <!-- Full Name -->
+                <div class="col-12 mb-3">
+                    <label for="full-name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="full-name" required>
+                </div>
+                
+                <!-- Email Address -->
+                <div class="col-12 mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="col-12 mb-3">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="col-12 mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <textarea class="form-control" id="address" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="text-center mb-3">
+                <button type="submit" class="btn btn-success w-100">Submit Order</button>
+            </div>
+        </form>
+    </div>
+    <script src="../assets/js/apimessages.js"></script>
+    <script src="../api/checkout.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

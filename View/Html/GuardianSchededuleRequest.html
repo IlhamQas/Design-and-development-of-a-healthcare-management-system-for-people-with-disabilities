@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guardian Schedule Request</title>
+ <link rel="stylesheet" href="../assets/css/GurdianScheduleRequest.css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+  <div class="header">
+    <button id="makeScheduleBtnHeader" onclick="switchPage('make')">Make Schedule</button>
+    <button id="modifyScheduleBtnHeader" onclick="switchPage('modify')">Modify Schedule</button>
+  </div>
+
+
+  <div class="container2">
+
+  <div id="makeScheduleSection" class="fade" style="display: block;">
+    <h2>Pending Schedule Requests</h2>
+    <div id="requestContainer"></div>
+    <p id="message"></p>
+  </div>
+
+  <div id="modifyScheduleSection" class="fade" style="display: none;">
+    <h2>Modify Schedule</h2>
+    <div id="requestContainer2"></div>
+    <p id="message2"></p>
+  </div>
+
+  </div>
+
+  <div id="scheduleModal" class="modal">
+    <div class="modal-content">
+      <h2>Doctor Schedule</h2>
+
+      <label for="departmentSelect">Select Department:</label>
+      <select id="departmentSelect" disabled></select>
+
+      <label for="doctorSelect">Select Doctor:</label>
+      <select id="doctorSelect" onchange="fetchDoctorSchedule()"></select>
+
+      <div id="scheduleDetails"></div>
+
+      <button onclick="goBack()">Back</button>
+      
+      <button onclick="confirmSingleAppointment()">Confirm Appointment</button>
+      <button onclick="closeModal()">Close</button>
+      <div id="stepMessage" class="message-box" style="display:none;"></div>
+    </div>
+  </div>
+
+  
+  <script src="../api/GurdianScheduleReq.js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

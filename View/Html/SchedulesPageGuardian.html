@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guardian Schedule</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 40px 20px;
+      color: #1e1e2f;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: #34495e;
+    }
+
+    .card {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+      overflow-x: auto;
+      padding: 30px;
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.97rem;
+      min-width: 800px;
+    }
+
+    .schedule-table thead {
+      background: #0d6efd;
+      color: white;
+    }
+
+    .schedule-table th, .schedule-table td {
+      padding: 14px 18px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .schedule-table tbody tr:nth-child(even) {
+      background-color: #f9fcff;
+    }
+
+    .schedule-table tbody tr:hover {
+      background-color: #eef6ff;
+      transition: background 0.3s ease;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 1.1rem;
+      color: #777;
+    }
+
+    @media (max-width: 768px) {
+      .schedule-table th,
+      .schedule-table td {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Guardian Session Schedule</h2>
+  <div class="card">
+    <div id="scheduleResult" class="no-data">Loading...</div>
+  </div>
+
+  <script>
+    const guardianId = new URLSearchParams(window.location.search).get('id');
+    console.log("Guardian ID:", guardianId);
+
+    async function loadGuardianSchedule(guardianId) {
+      const resultEl = document.getElementById('scheduleResult');
+
+      if (!guardianId) {
+        resultEl.textContent = "No guardian ID provided.";
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:4000/api/v1/Guardian/getguardianSchedule/${guardianId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            resultEl.textContent = "No schedule found for this guardian.";
+          } else {
+            resultEl.textContent = `Error: ${response.statusText}`;
+          }
+          return;
+        }
+
+        const data = await response.json();
+
+        if (!data.sessions || data.sessions.length === 0) {
+          resultEl.textContent = "No sessions scheduled.";
+          return;
+        }
+
+        let tableHTML = `
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Specialist</th>
+                <th>New Day</th>
+                <th>New Time</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        data.sessions.forEach(session => {
+          tableHTML += `
+            <tr>
+              <td>${session.department?.name || '-'}</td>
+              <td>${session.dayOfWeek || '-'}</td>
+              <td>${session.time || '-'}</td>
+              <td>${session.specialistId?.name || '-'}</td>
+              <td>${session.newDay || '-'}</td>
+              <td>${session.newTime || '-'}</td>
+            </tr>
+          `;
+        });
+
+        tableHTML += `</tbody></table>`;
+
+        resultEl.innerHTML = tableHTML;
+
+      } catch (error) {
+        resultEl.textContent = "Failed to load schedule. Please try again later.";
+        console.error(error);
+      }
+    }
+
+    loadGuardianSchedule(guardianId);
+  </script>
+
+</body>
+</html>

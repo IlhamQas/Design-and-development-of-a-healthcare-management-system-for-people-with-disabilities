@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Sales Analytics</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px auto;
+      max-width: 1000px;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      margin-bottom: 25px;
+      padding: 20px 25px;
+    }
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.4rem;
+      color: #2980b9;
+    }
+    .highlight {
+      font-size: 2rem;
+      color: #27ae60;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sales</h1>
+
+  <div class="card">
+    <h2>Total Revenue</h2>
+    <div id="totalRevenue" class="highlight">Loading...</div>
+  </div>
+
+  <div class="card">
+    <h2>Top Selling Products</h2>
+    <table id="topProductsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Product Name</th>
+          <th>Quantity Sold</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Monthly Revenue</h2>
+    <canvas id="monthlyChart" height="120"></canvas>
+  </div>
+
+  <script>
+    const token = localStorage.getItem('token');
+
+  
+    async function loadTotalSales() {
+      const res = await fetch('http://localhost:4000/api/v1/sale/all', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      document.getElementById("totalRevenue").textContent = `$${data.totalRevenue.toFixed(2)}`;
+    }
+
+    // Top Products
+    async function loadTopSellingProducts() {
+      const res = await fetch('http://localhost:4000/api/v1/sale/getTopSellingProducts', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+
+      const tbody = document.querySelector("#topProductsTable tbody");
+      tbody.innerHTML = "";
+      data.topProducts.forEach((prod, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${prod.productDetails.name}</td>
+          <td>${prod.totalSold}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // Monthly Revenue Chart
+    async function loadMonthlyRevenue() {
+      const res = await fetch('http://localhost:4000/api/v1/sale/getMonthlyRevenue', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+
+      const labels = data.monthlyRevenue.map(item => `${item._id.month}/${item._id.year}`);
+      const revenues = data.monthlyRevenue.map(item => item.totalRevenue);
+
+      new Chart(document.getElementById("monthlyChart"), {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [{
+            label: "Revenue",
+            data: revenues,
+            backgroundColor: "#2980b9"
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    // Init
+    loadTotalSales();
+    loadTopSellingProducts();
+    loadMonthlyRevenue();
+  </script>
+
+</body>
+</html>

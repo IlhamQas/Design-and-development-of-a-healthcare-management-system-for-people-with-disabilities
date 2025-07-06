@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+  <title>SkyMED Chat</title>
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      background-color: #f2f7fb;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 22%;
+      background-color: #e9f1f7;
+      border-right: 1px solid #c7d9eb;
+      padding: 20px 15px;
+      overflow-y: auto;
+      box-shadow: 3px 0 8px rgba(0,0,0,0.08);
+
+    }
+
+    .sidebar h2 {
+      color: #0776b6;
+      margin-bottom: 25px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      border-bottom: 2px solid #7fb4d9;
+      padding-bottom: 12px;
+      letter-spacing: 0.03em;
+    }
+
+    .doctor {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      margin-bottom: 14px;
+      background-color: #ffffff;
+      border-left: 5px solid #378179;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      user-select: none;
+    }
+
+    .doctor:hover {
+      background-color: #d3e9f9;
+      box-shadow: 0 4px 12px rgba(42,157,143,0.3);
+      transform: translateX(3px);
+    }
+
+    .doctor img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #2a9d8f;
+      background-color: #cce7e4;
+      flex-shrink: 0;
+    }
+
+    .doctor .name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: hsl(175, 53%, 41%);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-area {
+      width: 78%;
+      display: flex;
+      flex-direction: column;
+      background-color: #f9fbfc;
+      box-shadow: inset 0 0 15px #d9e6eb;
+    }
+
+    .chat-header {
+      padding: 10px 28px;
+      background-color: #1976d2;
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-bottom: 1px solid #278a97;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 68px;
+      flex-shrink: 0;
+    }
+
+    .chat-header img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #259487;
+      background-color: #cce7e4;
+      flex-shrink: 0;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 25px 28px;
+      overflow-y: auto;
+      background-color: #e7f1f1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scrollbar-width: thin;
+      scrollbar-color: #2ca798 #cce7e4;
+    }
+
+    /* Scrollbar for Webkit */
+    .chat-box::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-box::-webkit-scrollbar-track {
+      background: #cce7e4;
+      border-radius: 4px;
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+      background-color: #358b81;
+      border-radius: 4px;
+    }
+
+    .message {
+      max-width: 60%;
+      padding: 16px 22px;
+      border-radius: 18px;
+      font-size: 1rem;
+      line-height: 1.5;
+      background-color: #e3f2fd;
+      align-self: flex-end;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      position: relative;
+      user-select: text;
+      word-wrap: break-word;
+    }
+
+    
+.message.theirs {
+  background-color: #ffffff;
+  border: 1px solid #dce3ea;
+  align-self: flex-start;
+  color: #37474f;
+}
+
+    .timestamp {
+      font-size: 0.75rem;
+      color: #555;
+      margin-top: 7px;
+      text-align: right;
+      user-select: none;
+    }
+
+    .message .you-label {
+  font-size: 0.7rem;
+  color: #1976d2;
+  position: absolute;
+  top: -12px;
+  right: 12px;
+ }
+
+    .message.theirs .you-label {
+      display: none;
+    }
+
+   
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #fafbfc;
+  border-top: 1px solid #ccc;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #90caf9;
+  outline: none;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #1976d2;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+#media-input {
+  display: none;
+}
+
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar, .chat-area {
+        width: 100%;
+        height: 50vh;
+      }
+      .chat-box {
+        padding: 16px;
+      }
+    }
+
+    #media-input {
+    display: none; /* نخفي عنصر الـ input */
+  }
+
+  #media-label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #000000;
+    margin-left: 10px;
+    margin-top: 9px;
+  }
+
+  #media-label:hover {
+    color: #0056b3;
+  }
+  </style>
+</head>
+<body>
+  <div class="sidebar" role="navigation" aria-label="Doctors List">
+    <h2>specialists</h2>
+    <div id="doctor-list" tabindex="0">
+    </div>
+  </div>
+
+  <div class="chat-area" role="main" aria-label="Chat area">
+    <div class="chat-header" id="chat-header" onclick="goToProfile()" style="cursor: pointer;">
+      <img id="chat-header-img" src="https://ui-avatars.com/api/?name=User+1&size=48" alt="User Image" />
+      <span id="chat-header-name">Select a specialist</span>
+    </div>
+    <div class="chat-box" id="chat-box" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <div class="input-container">
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Write a message..."
+        autocomplete="off"
+        aria-label="Type your message"/>
+
+        <label for="media-input" id="media-label" title="Attach image or video">
+          <i class="fas fa-paperclip"></i>
+        </label>
+<input type="file" id="media-input" accept="image/*,video/*" name="media" />
+      <button id="send-btn" aria-label="Send message">&#10148;</button>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+ <script src="../api/Chat(gurdian).js"></script>
+</body>
+</html>
+

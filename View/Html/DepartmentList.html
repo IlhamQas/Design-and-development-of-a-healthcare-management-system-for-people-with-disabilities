@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Departments</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../assets/css/department.css">
+</head>
+<style>
+  .edit-dep-btn {
+  position: relative;  
+  left: 600px;
+  bottom:162px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #007bff;
+  
+}
+.edit-dep-btn:hover {
+  color: #0056b3;
+}
+</style>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+  <div class="container">
+    <h1>Departments List</h1>
+    <div id="departmentsContainer"></div>
+    <h4>➕<a href="../Html/addDepartment(Admin).html"> Add new department</a></h4>  </div>
+
+  <div id="doctorModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeDoctorModal()">&times;</span>
+      <img id="doctorImage" src="" alt="Doctor Image" style="width:100px; height:100px; border-radius:50%; object-fit:cover; margin-bottom: 10px;" />
+      <h2 id="doctorName"></h2>
+      <p id="doctorid"></p>
+      <p id="doctorEmail"></p>
+      <button class="removeDoctorBtn" id="removeDoctorBtn">Delete from Department</button>
+    </div>
+  </div>
+  
+  <script src="../api/departmentList.js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

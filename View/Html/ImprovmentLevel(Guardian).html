@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Session Improvement Overview</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0px 180px;
+      background: linear-gradient(to bottom right, #f0faff, #ffffff);
+      color: #333;
+    }
+
+    h2 {
+      color: #0077b6;
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+
+    .filters select,
+    .filters input[type="date"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      min-width: 160px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      margin-bottom: 40px;
+    }
+
+    th, td {
+      padding: 18px 20px;
+      text-align: left;
+      border-bottom: 1px solid #f2f2f2;
+    }
+
+    th {
+      background-color: #e0f7fa;
+      color: #00575c;
+    }
+
+    td div {
+      padding: 6px 0;
+    }
+
+    .chart-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .export-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .export-buttons button {
+      margin: 5px;
+      padding: 10px 16px;
+      border: none;
+      background-color: #0077b6;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .export-buttons button:hover {
+      background-color: #005a8c;
+    }
+
+    canvas {
+      max-height: 400px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📊 Improvement Overview</h2>
+
+  <div class="filters">
+    <select id="doctorFilter">
+      <option value="">👨‍⚕️ All Doctors</option>
+    </select>
+
+    <select id="departmentFilter">
+      <option value="">🏥 All Departments</option>
+    </select>
+
+    <input type="date" id="dateFilter">
+  </div>
+
+  <table id="improvementTable">
+    <thead>
+      <tr>
+        <th>🗓️ Date</th>
+        <th>🏥 Department</th>
+        <th>👨‍⚕️ Doctor</th>
+        <th>📈 Notes</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="chart-container">
+    <canvas id="progressChart"></canvas>
+  </div>
+
+  <div class="export-buttons">
+    <button onclick="exportToExcel()">Export to Excel</button>
+    <button onclick="exportToPDF()">Export to PDF</button>
+    <button onclick="downloadChart()">Download Chart</button>
+  </div>
+
+  <script>
+    let allData = [];
+
+    const token = localStorage.getItem("token");
+
+    async function fetchAndDisplayData() {
+      const res = await fetch("http://localhost:4000/api/v1/sessionRecord/getImprovment", {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      allData = data.sessionsWithImprovement;
+      populateFilters(allData);
+      renderFilteredData();
+    }
+
+    function populateFilters(data) {
+      const doctorSet = new Set();
+      const departmentSet = new Set();
+
+      data.forEach(session => {
+        session.improvements.forEach(i => doctorSet.add(i.doctorName));
+        departmentSet.add(session.department);
+      });
+
+      const doctorFilter = document.getElementById("doctorFilter");
+      const departmentFilter = document.getElementById("departmentFilter");
+
+      doctorSet.forEach(doc => {
+        const option = document.createElement("option");
+        option.value = doc;
+        option.textContent = doc;
+        doctorFilter.appendChild(option);
+      });
+
+      departmentSet.forEach(dep => {
+        const option = document.createElement("option");
+        option.value = dep;
+        option.textContent = dep;
+        departmentFilter.appendChild(option);
+      });
+    }
+
+    function renderFilteredData() {
+      const selectedDoctor = document.getElementById("doctorFilter").value;
+      const selectedDate = document.getElementById("dateFilter").value;
+      const selectedDept = document.getElementById("departmentFilter").value;
+
+      const tbody = document.querySelector('#improvementTable tbody');
+      const chartLabels = [];
+      const chartRatings = [];
+      tbody.innerHTML = '';
+
+      allData.forEach(session => {
+        if (selectedDept && session.department !== selectedDept) return;
+
+        const filteredImprovements = session.improvements.filter(i => {
+          const matchDoctor = !selectedDoctor || i.doctorName === selectedDoctor;
+          const matchDate = !selectedDate || new Date(i.date).toISOString().slice(0, 10) === selectedDate;
+          return matchDoctor && matchDate;
+        });
+
+        if (filteredImprovements.length > 0) {
+          const tr = document.createElement('tr');
+          const dateStr = filteredImprovements.map(i => new Date(i.date).toLocaleDateString()).join('<br>');
+          const notes = filteredImprovements.map(i => {
+            chartLabels.push(`${new Date(i.date).toLocaleDateString()} - ${session.department}`);
+            chartRatings.push(i.improvementLevel);
+            return `<div>${i.improvementLevel}⭐ - ${i.note} <em>(${i.doctorName})</em></div>`;
+          }).join('');
+
+          tr.innerHTML = `
+            <td>${dateStr}</td>
+            <td>${session.department}</td>
+            <td>${session.specialist}</td>
+            <td>${notes}</td>
+          `;
+          tbody.appendChild(tr);
+        }
+      });
+
+      drawChart(chartLabels, chartRatings);
+    }
+
+    function drawChart(labels, data) {
+      const ctx = document.getElementById('progressChart').getContext('2d');
+      if (window.myChart) window.myChart.destroy();
+      window.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Improvement Level',
+            data,
+            borderColor: '#00b4d8',
+            backgroundColor: 'rgba(0,180,216,0.1)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: true } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              suggestedMax: 5,
+              title: { display: true, text: 'Level (1-5)' }
+            },
+            x: {
+              title: { display: true, text: 'Date & Department' }
+            }
+          }
+        }
+      });
+    }
+
+    function exportToExcel() {
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.table_to_sheet(document.getElementById('improvementTable'));
+      XLSX.utils.book_append_sheet(wb, ws, "Improvements");
+      XLSX.writeFile(wb, "improvement_data.xlsx");
+    }
+
+    function exportToPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.text("Improvement Overview", 14, 16);
+      doc.autoTable({ html: '#improvementTable', startY: 20 });
+      doc.save("improvement_data.pdf");
+    }
+
+    function downloadChart() {
+      const link = document.createElement("a");
+      link.download = "chart.png";
+      link.href = document.getElementById("progressChart").toDataURL("image/png");
+      link.click();
+    }
+
+    document.getElementById("doctorFilter").addEventListener("change", renderFilteredData);
+    document.getElementById("dateFilter").addEventListener("change", renderFilteredData);
+    document.getElementById("departmentFilter").addEventListener("change", renderFilteredData);
+
+    fetchAndDisplayData();
+  </script>
+
+
+</body>
+</html>

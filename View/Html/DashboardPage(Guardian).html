@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard page</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="../assets/css/DashboardPage.css">
+        <link rel="stylesheet" href="../assets/css/publishPost.css"> 
+        <link rel="stylesheet" href="../assets/css/font.css">
+        
+
+    </head>
+    <style>
+.card{
+       height: 100px;
+       display: flex;
+       margin-bottom: 10px;
+       flex-direction: row;
+       gap:700px;
+}
+      
+.cardd {
+  height: 200px;
+  min-width: 150px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #444;
+  padding: 16px;
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.cardd:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+  
+      .chart-container {
+        margin-top: 60px;
+        background: #fff;
+        padding: 35px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      }
+  
+      canvas {
+        max-height: 400px;
+      }
+
+
+  
+    
+    </style>
+    <body>
+      <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+      padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+      <div id="loading-screen">
+        <div class="spinner-wrapper">
+          <div class="spinner"></div>
+          <img src="../assets/images/med 1.png" alt="Sky Medical Logo" id="loading-logo">
+          
+        </div>
+      </div>
+       
+        <div class="sidebar" id="GurdianSidebar">
+            <h3 onclick="window.location.href='../HomePage.html'" style="padding-left: 12px;color: rgba(255, 255, 255, 0.822);">
+                SKY MEDICAL</h3>
+
+            <img id="profile-picture'" class="profile-picture"
+                src="../assets/images/defultUserProfilepic.jpg"
+                alt="Profile Picture">
+            <ul style="color: gray;"> Dashboard
+                <a onclick="window.location.reload()" href="#"><i class="fa fa-home"></i> Home</a>
+                <a href="../Html/UserprofilePage.html"><i class="fa-solid fa-user"></i> User Profile</a>
+                <a href="#" onclick="showPosts()"><i class="fa-solid fa-newspaper"></i> Explore Posts</a>
+                <a href="../Html/Kids_Activities.html"><i class="fa-solid fa-book"></i> Activitie</a>
+            </ul>
+            <ul>Appointment Mangment
+                <a href="../Html/SchedulesPage(Guardian).html"><i class="fa-regular fa-calendar-check"></i>my Schedule</a>
+                <a href="../Html/previosSessiosn(Guardian).html"><i class="fa-regular fa-calendar-check"></i>my previos Sessiosn</a>
+            </ul>
+
+        
+
+            <ul>Communication
+                <a href="../Html/AllChat.html"><i class="fa-solid fa-user-doctor"></i> My Contact</a>
+                <a href="../Html/chat(Guardian).html"><i class="fa-solid fa-user-doctor"></i> Specialists</a>
+                <a href="../Html/chatSupport.html?to=manager"><i class="fa-solid fa-headset"></i> Manger </a>
+                <a href="../Html/chatSupport.html?to=admin"><i class="fa-solid fa-link"></i> Support</a>
+            </ul>
+
+            <ul> Analytics & Report
+                <a id="evaluations-link" href="#" onclick="goToEvaluations(event)"><i class="fa fa-star"></i> My Evaluations</a>
+                <a id="treatmentPlan-link" href="#"onclick="goToTretmentPlan(event)"><i class="fa-regular fa-map"></i> My Treatment plan</a>
+                <a href="../Html/viewReport.html"><i class="fa fa-chart-line"></i> My Session Reports</a>
+                
+            </ul>
+            <ul>E-MarketPlace & Financal Rrcords
+              <a href="../Html/shop.html"><i class="fa-solid fa-shop"></i> shop Now</a>
+              <a href="../Html/childPaymentRecord.html"><i class="fa-solid fa-book"></i> My financal Report</a>
+              <a href="../Html/orderHistory.html"><i class="fa-solid fa-book"></i> My orders History</a>
+
+          </ul>
+
+            <ul>Settings
+                <a href="../Html/AccountSetting.html"><i class="fa-solid fa-key"></i> Account Settings</a>
+                <a href="#"><i class="fa fa-cogs"></i> Role and permissions</a>
+            </ul>
+            <ul style="font-size: smaller;">
+                @2025 All rights reserved.
+            </ul>
+
+
+            <ul style="font-size: smaller;">
+             <a href="../HomePage.html"><img style="width: 150px; height: 70px;" src="../assets/images/med 1.png"></a>
+          </ul>
+        </div>
+
+        </div>
+        <div class="main-content" id="main-content">
+            <div class="navbar">
+                <div class="search-bar"> <i class="fa fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                
+                <div class="user-icons">
+
+                  <div class="dropdown">
+                    <i id="notifIcon" class="fa fa-bell" onclick="toggleDropdown('notificationsDropdown'); markAsRead();"></i>
+                    <div class="redDot"></div>
+                    <div id="notificationsDropdown"  class="dropdown-content notificationsDropdown"></div>
+                </div>
+
+                <div class="dropdown">
+                  <i id="message" class="fa-solid fa-comment"onclick="toggleDropdown('messagesDropdown');"></i>
+                  <div  class="messageDot"></div>
+                  <div id="messagesDropdown" class="dropdown-content messagesDropdown"></div>
+              </div>
+                    
+
+                    <div class="dropdown">
+                        <img id="profileDropdownImg" src="../assets/images/defultUserProfilepic.jpg" alt="Profile Picture" onclick="toggleDropdown('profileDropdown')">
+                        <div id="profileDropdown" class="dropdown-content">
+                            <p><a href="../Html/UserprofilePage.html"><i style="font-size: 16px; padding-right: 20px;" class="fa-solid fa-user"></i> View Profile</a></p>
+                            <p><a href="../Html/AccountSetting.html"><i style="font-size: 18px; padding-right: 20px;" class="fa fa-cogs"></i> Settings</a></p>
+                            <p onclick="logout()"><a href="#"><i style="font-size: 18px; padding-right: 20px;" class="fa-solid fa-right-from-bracket"></i> Logout</a></p>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            
+          
+            <div style="margin-left: 50px;"  class="mt-4">
+                <h4 id="userName">Welcome Back, User!</h4>
+                <div id="no-results-message" class="card" style="display: none;margin: auto;">No Match post</div>
+                <div id="cheakProfile"  class="card"><h6>👤 Your profile is incomplete. Click here to complete it</h6><button onclick="window.location.href='../Html/UserprofilePage.html'">Go</button></div>
+                <div id="cheakSchedules"  class="card"><h6> 📅 You dont have a schedule yet. Please set your Request to start receiving sessions</h6><button onclick="window.location.href='../Html/SchedulesPage(Guardian).html'">Go</button></div>
+          <div class="content"> 
+          <div class="dashboard-section">
+  <div class="cardd">
+    <h4>📅 Check Schedule</h4>
+    <p>View your upcoming sessions and appointments.</p>
+    <a href="../Html/SchedulesPage(Guardian).html" class="btn btn-primary">Go to Schedule</a>
+  </div>
+
+  
+  <div class="cardd">
+    <h4>📝 Treatment Plan</h4>
+    <p>Review the treatment plans and child evaluations.</p>
+    <a onclick="goToTretmentPlan(event)" class="btn btn-success">View Plans</a>
+  </div>
+
+  <div class="cardd">
+    <h4>📄 Medical Reports</h4>
+    <p>Access all uploaded reports and documents.</p>
+    <a href="../Html/viewReport.html" class="btn btn-info">Check Reports</a>
+  </div>
+
+  
+  <div class="cardd">
+    <h4>🛒 Marketplace</h4>
+    <p>Explore useful tools and resources for your child.</p>
+    <a href="../Html/shop.html" class="btn btn-warning">Visit Store</a>
+  </div>
+  
+  <div class="cardd">
+    <h4>🕓 Previous Sessions</h4>
+    <p>Review your session history and improvement records.</p>
+    <a href="../Html/previosSessiosn(Guardian).html" class="btn btn-danger">Visit Previous Sessions</a>
+  </div>
+
+  <div class="cardd">
+    <h4> 💬 Chat with your specialists</h4>
+    <p>Start a conversation with your assigned specialists.</p>
+    <a href="../Html/chat(Guardian).html" class="btn btn-primary">Chat</a>
+  </div>
+        </div>
+
+          <div id="progressChartcontaner" class="cardy">
+            <div class="chart-container">
+              <p id="chartMessage" style="text-align: center; color: gray;"></p>
+            <canvas id="progressChart"></canvas>
+          </div></div>
+         
+          </div>        
+            <div id="post-display-containerr"></div>
+            <div class="modal" id="image-modal" onclick="closeModal()">
+                <img id="modal-img" src="" alt="تكبير الصورة" />
+            </div>
+
+
+
+
+          <div id="mediaModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage">
+          </div>
+      
+            <div class="right-sidebar hidden" id="right-sidebar">
+                <button class="btn btn-danger" id="close-sidebar-btn"
+                    onclick="closeRightSidebar()">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <div class="month-year" id="month-year"></div>
+                        <div>
+                            <button id="prev-month"><i
+                                    class="fa fa-chevron-left"></i></button>
+                            <button id="next-month"><i
+                                    class="fa fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+                <div class="appointments">
+                    <h5>Upcoming Appointments</h5>
+                </div>
+
+            </div>
+            <button class="open-btn" onclick="openRightSidebar()"><i
+                    class="fa-solid fa-chevron-up"></i></button>
+        </div>
+
+      
+   <script src="../api/Dashbord(guardian).js"></script>
+   <script src="../assets/js/apimessages.js"></script>
+   <script src="../assets/js/logout.js"></script>
+   <script src="../assets/js/DashbordPage.js"></script>
+   <script src="../api/notification.js"></script>
+   <script src="../api/message.js"></script>
+  
+ 
+
+
+
+    </body>
+</html>

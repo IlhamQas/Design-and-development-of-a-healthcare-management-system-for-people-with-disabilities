@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accepted Orders</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f2f5;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    #orders-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .order {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .order:hover {
+      transform: translateY(-3px);
+    }
+
+    .order p {
+      margin: 8px 0;
+      color: #444;
+    }
+
+    .product-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+
+    .product-item img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .total {
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #1a73e8;
+      margin-top: 10px;
+    }
+
+    .message {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Your Accepted Orders</h2>
+  <div id="orders-list">Loading...</div>
+
+  <script>
+    async function fetchAcceptedOrders() {
+      try {
+        const response = await fetch(`http://localhost:4000/api/v1/order/allacceptOrder`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Something went wrong');
+        }
+
+        displayOrders(data.acceptedOrders);
+      } catch (err) {
+        document.getElementById('orders-list').innerHTML = `<p class="error">${err.message}</p>`;
+      }
+    }
+
+    function displayOrders(orders) {
+      const container = document.getElementById('orders-list');
+      container.innerHTML = '';
+
+      if (!orders || orders.length === 0) {
+        container.innerHTML = `<p class="message">No accepted orders found.</p>`;
+        return;
+      }
+
+      orders.forEach(order => {
+        const orderDiv = document.createElement('div');
+        orderDiv.className = 'order';
+
+        const productList = order.products.map(p => {
+          const imgUrl = p.productId?.image || 'https://via.placeholder.com/65';
+          return `
+            <div class="product-item">
+              <img src="${imgUrl}" alt="${p.productId?.name || 'Product'}"/>
+              <span>${p.productId?.name || 'Deleted Product'} - Quantity: ${p.quantity}</span>
+            </div>
+          `;
+        }).join('');
+
+        orderDiv.innerHTML = `
+          <p><strong>Order ID:</strong> ${order._id}</p>
+          ${productList}
+          <p class="total">Total Price: $${order.totalPrice.toFixed(2)}</p>
+        `;
+
+        container.appendChild(orderDiv);
+      });
+    }
+
+    fetchAcceptedOrders();
+  </script>
+</body>
+</html>

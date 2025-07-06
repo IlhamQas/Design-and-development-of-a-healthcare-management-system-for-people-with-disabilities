@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>SkyMED Chat</title>
+  <style>
+    /* Reset */
+    * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+  display: flex;
+  background-color: #eef2f7;
+  overflow: hidden;
+}
+
+.chat-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #1976d2;
+  color: white;
+  padding: 16px 24px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.chat-header img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.chat-box {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+  background-color: #f4f7fa;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message {
+  max-width: 65%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #e3f2fd;
+  align-self: flex-end;
+  color: #0d47a1;
+  position: relative;
+  word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.message.theirs {
+  background-color: #ffffff;
+  border: 1px solid #dce3ea;
+  align-self: flex-start;
+  color: #37474f;
+}
+
+.message-media {
+  max-width: 100%;
+  margin-top: 8px;
+  border-radius: 8px;
+}
+
+.timestamp {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 6px;
+}
+
+.you-label {
+  font-size: 0.7rem;
+  color: #1976d2;
+  position: absolute;
+  top: -12px;
+  right: 12px;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #fafbfc;
+  border-top: 1px solid #ccc;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #90caf9;
+  outline: none;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #1976d2;
+}
+
+button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #1565c0;
+}
+
+#media-input {
+  display: none;
+}
+
+#media-label {
+  cursor: pointer;
+  font-size: 22px;
+  color: #546e7a;
+  margin-left: 10px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="chat-area">
+    <div class="chat-header" id="chat-header">
+      <img id="chat-header-img" src="https://ui-avatars.com/api/?name=User+1&size=48" alt="User Image" />
+      <span id="chat-header-name">Admin/Manager</span>
+    </div>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="input-container">
+      <input type="text" id="message-input" placeholder="Write a message..." />
+      <label for="media-input" id="media-label"><i class="fas fa-paperclip"></i></label>
+      <input type="file" id="media-input" accept="image/*,video/*" name="media" />
+      <button id="send-btn">&#10148;</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+    const senderStr = localStorage.getItem("user");
+    const sender = senderStr ? JSON.parse(senderStr) : null;
+    const senderId = sender ? sender._id : null;
+    const token = localStorage.getItem("token");
+    const socket = io("http://localhost:4000");
+
+    let receiverId = "";
+
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("message-input");
+    const mediaInput = document.getElementById("media-input");
+    const sendBtn = document.getElementById("send-btn");
+
+    const chatHeaderName = document.getElementById("chat-header-name");
+    const chatHeaderImg = document.getElementById("chat-header-img");
+
+    socket.emit("addUser", senderId);
+
+    function formatTime(dateStr) {
+      const date = new Date(dateStr);
+      return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }
+
+function displayMessage(isMine, text, createdAt, mediaUrl = null, mediaType = null) {
+  const msg = document.createElement("div");
+  msg.className = `message ${isMine ? "" : "theirs"}`;
+
+  let content = "";
+
+  if (mediaUrl) {
+    if (mediaType && mediaType.startsWith("image")) {
+      content += `<img class="message-media" src="${mediaUrl}" alt="image" />`;
+    } else if (mediaType && mediaType.startsWith("video")) {
+      content += `<video class="message-media" controls>
+                    <source src="${mediaUrl}" type="${mediaType}" />
+                    Your browser does not support the video tag.
+                  </video>`;
+    }
+  }
+
+  if (text) {
+    content = `<p>${text}</p>` + content;
+  }
+  const senderLabel = isMine ? "" : receiverName;
+
+  msg.innerHTML = `
+    <div style="font-size: 0.75rem; font-weight: 600; margin-bottom: 4px; color: ${isMine ? '#1976d2' : '#37474f'};">
+      ${senderLabel}
+    </div>
+    ${content}
+    <div class="timestamp">${formatTime(createdAt)}</div>
+    ${isMine ? '<div class="you-label">You</div>' : ''}
+  `;
+
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+    function scrollToBottom() {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+
+    function getReceiverRoleFromURL() {
+       const params = new URLSearchParams(window.location.search);
+        return params.get("to"); 
+}
+
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    sendBtn.click();
+  }
+});
+
+
+    async function fetchReceiver() {
+      const role = getReceiverRoleFromURL(); 
+  try {
+    const res = await fetch(`http://localhost:4000/api/v1/admin/getMangerAdmin`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    const users = data.managers;
+
+    const targetUser = users.find(user => user.role === role);
+
+    if (targetUser) {
+      selectUser(targetUser); 
+    } else {
+      console.error(`No user found with role: ${role}`);
+    }
+
+  } catch (error) {
+    console.error("Error fetching receiver:", error);
+  }
+}
+let receiverName = "";
+    function selectUser(user) {
+      receiverId = user._id;
+      receiverName = user.name; 
+      chatHeaderName.innerText = user.name;
+      chatHeaderImg.src = user.image?.url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}`;
+      chatBox.innerHTML = "";
+      loadMessages();
+    }
+
+    async function loadMessages() {
+  chatBox.innerHTML = "";
+  const res = await fetch(`http://localhost:4000/api/V1/chat/getMessage/${senderId}/${receiverId}`, {
+    method: "GET",
+    headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+  });
+
+  const messages = await res.json();
+  messages.forEach(msg => {
+    const isMine = msg.senderId.toString() === senderId;
+    displayMessage(isMine, msg.message, msg.createdAt, msg.mediaUrl, msg.mediaType);
+  });
+  scrollToBottom();
+}
+
+sendBtn.addEventListener("click", async () => {
+  const text = input.value.trim();
+  const fileInput = document.getElementById("media-input");
+  const file = fileInput.files[0];
+
+  if (!text && !file) return;
+
+  const formData = new FormData();
+  formData.append("receiverId", receiverId);
+  if (text) formData.append("message", text);
+  if (file) formData.append("media", file);
+
+  try {
+    const res = await fetch("http://localhost:4000/api/v1/chat/sendMessage", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      const { newMessage } = data;
+      displayMessage(
+        true,
+        newMessage.message,
+        newMessage.createdAt,
+        newMessage.mediaUrl,
+        newMessage.mediaType
+      );
+      input.value = "";
+      fileInput.value = null;
+
+     
+      socket.emit("sendMessage", {
+        senderId,
+        receiverId,
+        text,
+        mediaUrl: newMessage.mediaUrl,
+        mediaType: newMessage.mediaType,
+      });
+
+    } else {
+      alert(data.message || "Failed to send message");
+    }
+  } catch (err) {
+    console.error("Error sending message:", err);
+    alert("Error sending message");
+  }
+});
+
+socket.on("privateMessage", ({ senderId: incomingSender, message, mediaUrl, mediaType, createdAt }) => {
+  if (incomingSender === receiverId) {
+    displayMessage(false, message, createdAt, mediaUrl, mediaType);
+    scrollToBottom();
+  }
+});
+
+
+fetchReceiver();
+</script>
+</body>
+</html>

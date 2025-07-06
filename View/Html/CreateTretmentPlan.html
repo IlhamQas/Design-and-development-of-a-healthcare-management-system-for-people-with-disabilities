@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> treatment plan</title>
+   <link rel="stylesheet" href="../assets/css/CreateTretmentPlan.css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+  <div class="container">
+    <h2>Individual treatment plan</h2>
+    <form id="iepForm">
+      <div class="section">
+        <h3 onclick="toggleSection(this)">البيانات الأساسية</h3>
+        <div class="section-content">
+          <label>اسم الطفل: <input type="text" name="child_name" /></label>
+          <label>الجنس:
+            <select name="gender">
+              <option value="ذكر">ذكر</option>
+              <option value="أنثى">أنثى</option>
+            </select>
+          </label>
+          <label>تاريخ الميلاد: <input type="date" name="dob" /></label>
+          <label>العمر الزمني: <input type="text" name="age" /></label>
+          <label>التشخيص: <textarea name="diagnosis"></textarea></label>
+          <label>تاريخ كتابة الخطة: <input type="date" name="plan_date" /></label>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">الحالة الصحية</h3>
+        <div class="section-content">
+          <label>السمع: <textarea name="hearing"></textarea></label>
+          <label>البصر: <textarea name="vision"></textarea></label>
+          <label>النطق: <textarea name="speech"></textarea></label>
+          <label>القدرة الحركية: <textarea name="motor"></textarea></label>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">الخدمات المساندة المقدمة للطفل</h3>
+            <div class="section-content">
+              <div id="support-services-container">   </div>
+        
+              <button type="button" onclick="addSupportService()">➕ إضافة خدمة جديدة</button>
+            </div>
+          </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">أعضاء فريق العمل</h3>
+        <div class="section-content">
+            <div id="team-members-container">
+            </div>
+            <button type="button" onclick="addTeamMember()">➕ إضافة عضو جديد</button>
+            <h4> تاريخ اعتماد الخطة</h4>
+            <label for="approval_date">تم اعتماد الخطة بتاريخ :</label>
+            <input type="date" id="approval_date" name="approval_date">
+        </div>
+      </div>
+  
+      <div class="section">
+        <h3 onclick="toggleSection(this)">نتائج التقييم الأولي</h3>
+        <div class="section-content">
+           
+            <h3>بعد إجراء التقييم اللازم للطفل تم تحديد كل من نقاط القوة ونقاط الضعف والتي جاءت في المجالات التالية كما يلي:</h3>
+
+            <h4>نتائج التقييم الأولى في المجال الحركي:</h4>
+            <label for="motor_strengths">نقاط القوة :</label>
+            <textarea id="motor_strengths" name="motor_strengths"></textarea>
+            <label for="motor_weaknesses">نقاط الضعف :</label>
+            <textarea id="motor_weaknesses" name="motor_weaknesses"></textarea>
+
+            <h4>نتائج التقييم الأولى في المساعدة الذاتية:</h4>
+            <label for="self_strengths">نقاط القوة :</label>
+            <textarea id="self_strengths" name="self_strengths"></textarea>
+            <label for="self_weaknesses">نقاط الضعف :</label>
+            <textarea id="self_weaknesses" name="self_weaknesses"></textarea>
+            
+            <h4>نتائج التقييم الأولى في المساعدة الاجتماعية:</h4>
+            <label for="social_strengths">نقاط القوة :</label>
+            <textarea id="social_strengths" name="social_strengths"></textarea>
+            <label for="social_weaknesses">نقاط الضعف :</label>
+            <textarea id="social_weaknesses" name="social_weaknesses"></textarea>
+            
+            <h4>نتائج التقييم الأولى في المساعدة الإدراكية:</h4>
+            <label for="cognitive_strengths">نقاط القوة :</label>
+            <textarea id="cognitive_strengths" name="cognitive_strengths"></textarea>
+            <label for="cognitive_weaknesses">نقاط الضعف :</label>
+            <textarea id="cognitive_weaknesses" name="cognitive_weaknesses"></textarea>
+            
+            <h4>نتائج التقييم الأولى في المساعدة الاتصالية:</h4>
+            <label for="communication_strengths">نقاط القوة :</label>
+            <textarea id="communication_strengths" name="communication_strengths"></textarea>
+            <label for="communication_weaknesses">نقاط الضعف :</label>
+            <textarea id="communication_weaknesses" name="communication_weaknesses"></textarea>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">الأهداف التربوية</h3>
+        <div class="section-content">
+            <label for="motor_goals">المجال الحركي: <textarea id="motor_goals" name="motor_goals"></textarea></label>
+            <label for="self_help_goals">مجال المساعدة الذاتية: <textarea id="self_help_goals" name="self_help_goals"></textarea></label>
+            <label for="social_goals">مجال المساعدة الاجتماعية: <textarea id="social_goals" name="social_goals"></textarea></label>
+            <label for="cognitive_goals">مجال المساعدة الإدراكية: <textarea id="cognitive_goals" name="cognitive_goals"></textarea></label>
+            <label for="communication_goals">مجال المساعدة الاتصالية: <textarea id="communication_goals" name="communication_goals"></textarea></label>
+
+        </div>
+      </div>
+    
+      <button type="submit">Save data</button>
+    </form>
+  </div>
+
+
+
+<script src="../api/CreateTretmentPlan.js"></script>
+<script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

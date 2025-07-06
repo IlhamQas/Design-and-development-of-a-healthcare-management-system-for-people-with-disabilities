@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hearing Department</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fbfffe, #fdfdfd);
+      color: #4a4a4a;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #35605a;
+      letter-spacing: 1.2px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 1rem;
+      margin-bottom: 5rem;
+      text-align: center;
+      color: #2a4d45;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #95b694;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+     
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+
+    p {
+      line-height: 1.6;
+      font-weight: 300;
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      max-width: 700px;
+      letter-spacing: 0.02em;
+    }
+
+    main {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      animation: fadeSlideIn 1s ease forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #ffffffdd;
+      padding: 1rem;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    #carousel {
+      display: flex;
+      transition: transform 0.6s ease;
+      cursor: grab;
+      user-select: none;
+    }
+
+    #carousel img {
+      width: 380px;
+      height: 380px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin: 0 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    #carousel img:not(:nth-child(1)) {
+      filter: brightness(0.9);
+      transform: scale(0.9);
+      opacity: 0.75;
+    }
+
+    #carousel img:hover {
+      filter: brightness(1);
+      transform: scale(0.95);
+      opacity: 1;
+      z-index: 10;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.4);
+      border: none;
+      color: #2a4d45;
+      font-size: 2.8rem;
+      padding: 0.3rem 0.9rem;
+      cursor: pointer;
+      border-radius: 50%;
+      user-select: none;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .arrow-btn:hover {
+      background: rgba(255, 244, 183, 0.5);
+      color: #fbb1bd;
+    }
+
+    #prev { left: 14px; }
+    #next { right: 14px; }
+
+    .btn-primary {
+      margin: 0 auto 2rem auto;
+      display: inline-block;
+      background: linear-gradient(90deg, #8ee6e6, #0e9c61);
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.3rem;
+      padding: 0.9rem 2.7rem;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(251, 177, 189, 0.5);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      box-shadow: 0 10px 35px rgba(142, 202, 230, 0.6);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    @media (max-width: 900px) {
+      #carousel { justify-content: center; }
+      .carousel-container { height: 320px; }
+      #carousel img { width: 280px; height: 280px; }
+    }
+
+    @media (max-width: 480px) {
+      #carousel img { width: 220px; height: 220px; }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.4rem; }
+      p { font-size: 1rem; }
+      .btn-primary {
+        font-size: 1.1rem;
+        padding: 0.7rem 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main role="main" aria-label="Hearing Center Information">
+
+    <section class="text-content" aria-labelledby="main-title">
+      <h1 id="main-title">Welcome to the Hearing Department</h1>
+
+      <h2 id="section-about">About the Hearing Department</h2>
+      <p>
+        Our Hearing Department is equipped with the latest technology and staffed by experienced audiologists. We specialize in comprehensive hearing assessments, hearing aid fittings, and rehabilitation services to improve your auditory health and quality of life.
+      </p>
+
+      <h2 id="section-why-form">Why This Appointment Form?</h2>
+      <p>
+        Booking an appointment ensures you receive personalized care tailored to your hearing needs. This form helps us schedule your visit efficiently, prepare the necessary equipment, and allocate enough time for a thorough examination and consultation.
+      </p>
+
+      <h2 id="section-hearing-process">How Do We Perform Hearing Tests?</h2>
+      <p>
+        Our hearing tests involve a series of non-invasive and painless procedures, including pure tone audiometry, speech audiometry, and tympanometry. These tests help us understand your hearing profile and determine if you need a hearing aid or other interventions.
+      </p>
+
+      <h2 id="section-fitting-process">Hearing Aid Fitting Process</h2>
+      <p>
+        After assessment, if you require hearing aids, we guide you through selecting the right device and customize the settings for your comfort and optimal performance. We also provide follow-up support and maintenance services to ensure your satisfaction.
+      </p>
+    </section>
+
+    <section class="carousel-container" aria-label="Images related to Hearing Center">
+      <div id="carousel" tabindex="0" aria-live="polite" aria-roledescription="carousel">
+        <img src="../assets/images/WhatsApp Image 2025-06-12 at 11.48.53 AM (1).jpeg" alt="Audiologist testing hearing headphones" draggable="false" />
+        <img src="../assets/images//WhatsApp Image 2025-06-12 at 11.48.53 AM (2).jpeg" alt="Modern hearing aid device" draggable="false" />
+        <img src="../assets/images/WhatsApp Image 2025-06-12 at 11.48.53 AM (3).jpeg" alt="Audiology equipment setup" draggable="false" />
+        <img src="../assets/images/WhatsApp Image 2025-06-12 at 11.48.53 AM.jpeg" alt="Patient being fitted with hearing aid" draggable="false" />
+        <img src="../assets/images/WhatsApp Image 2025-06-12 at 11.48.54 AM.jpeg" alt="Patient being fitted with hearing aid" draggable="false" />
+        <img src="../assets/images/WhatsApp Image 2025-06-12 at 11.48.53 AM (1).jpeg" alt="Audiologist testing hearing headphones" draggable="false" />
+        
+      </div>
+      <button id="prev" class="arrow-btn" aria-label="Previous Image">&#10094;</button>
+      <button id="next" class="arrow-btn" aria-label="Next Image">&#10095;</button>
+    </section>
+
+  </main>
+
+  <a href="../Html/BookAppointmentPage.html" class="btn-primary" role="button" aria-label="Book your hearing appointment">
+    Book Your Appointment
+  </a>
+
+  <script>
+    const carousel = document.getElementById('carousel');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const images = carousel.querySelectorAll('img');
+    const totalImages = images.length;
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      carousel.style.transform = `translateX(-${currentIndex * (images[0].clientWidth + 20)}px)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalImages;
+      updateCarousel();
+    });
+
+    window.addEventListener('load', updateCarousel);
+
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevBtn.click();
+      else if (e.key === 'ArrowRight') nextBtn.click();
+    });
+  </script>
+
+</body>
+</html>

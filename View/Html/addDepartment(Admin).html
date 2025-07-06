@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Department</title>
+  <link rel="stylesheet" href="../assets/css/AddDepartment.css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+  <div class="form-container">
+    <h2>➕ Add Department</h2>
+    <form id="addDeptForm">
+      <label for="name">Department Name</label>
+      <input type="text" id="name" name="name" placeholder="e.g. Speech Therapy" required />
+      <button type="submit">Add Department</button>
+      <div class="message" id="message"></div>
+    </form>
+  </div>
+  <script src="../api/AddDepartment.js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+ 
+</body>
+</html>

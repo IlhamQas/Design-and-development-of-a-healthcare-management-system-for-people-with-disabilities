@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Evaluations</title>
+  <link rel="stylesheet" href="../assets/css/myEvaluation.css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+<div class="container">
+  <h2 class="logo">My Evaluations</h2>
+  <input type="text" id="searchInput" placeholder="Search by guardian name...">
+  <div id="evaluationsContainer">
+    <p class="no-results">Loading evaluations...</p>
+  </div>
+</div>
+
+<script src="../api/myEvaluation.js"></script>
+<script src="../assets/js/apimessages.js"></script>
+
+
+</body>
+</html>

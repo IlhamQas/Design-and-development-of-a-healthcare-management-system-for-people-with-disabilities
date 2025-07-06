@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+  <title>Chat</title>
+  <link rel="stylesheet" href="../assets/css/chat(Specialist).css">
+</head>
+<body>
+  <div class="sidebar" role="navigation" aria-label="Doctors List">
+    <h2>Guardians</h2>
+    <div id="guardian-list" tabindex="0">
+    </div>
+  </div>
+
+  <div class="chat-area" role="main" aria-label="Chat area">
+    <div class="chat-header" onclick="goToProfile()" id="chat-header">
+      <img id="chat-header-img" src="https://ui-avatars.com/api/?name=User+1&size=48" alt="User Image" />
+      <span id="chat-header-name">Select a Guardian</span>
+    </div>
+    <div class="chat-box" id="chat-box" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
+    <div class="input-container">
+      <input
+        type="text"
+        id="message-input"
+        placeholder="Write a message..."
+        autocomplete="off"
+        aria-label="Type your message"/>
+
+        <label for="media-input" id="media-label" title="Attach image or video">
+          <i class="fas fa-paperclip"></i>
+        </label>
+<input type="file" id="media-input" accept="image/*,video/*" name="media" />
+      <button id="send-btn" aria-label="Send message">&#10148;</button>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script>
+ 
+    const senderStr = localStorage.getItem("user");
+    const sender = senderStr ? JSON.parse(senderStr) : null;
+    const senderId = sender ? sender._id : null;
+    const token = localStorage.getItem("token");
+    const socket = io("http://localhost:4000");
+
+    let receiverId = "";
+
+    const chatBox = document.getElementById("chat-box");
+    const input = document.getElementById("message-input");
+    const sendBtn = document.getElementById("send-btn");
+    const header = document.getElementById("chat-header");
+    const guardianList = document.getElementById("guardian-list");
+
+
+    const chatHeaderImg = document.getElementById("chat-header-img");
+    const chatHeaderName = document.getElementById("chat-header-name");
+
+    socket.emit("addUser", senderId);
+
+    function formatTime(dateStr) {
+      const date = new Date(dateStr);
+      return `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }
+
+  function displayMessage(isMine, text, createdAt, mediaUrl = null, mediaType = null) {
+  const msg = document.createElement("div");
+  msg.className = `message ${isMine ? "" : "theirs"}`;
+
+  let content = "";
+
+  if (mediaUrl) {
+    if (mediaType.startsWith("image")) {
+      content += `<img src="${mediaUrl}" alt="image" style="max-width: 100%; border-radius: 8px; margin-top: 8px;" />`;
+    } else if (mediaType.startsWith("video")) {
+      content += `<video controls style="max-width: 100%; border-radius: 8px; margin-top: 8px;">
+                    <source src="${mediaUrl}" type="${mediaType}" />
+                    Your browser does not support the video tag.
+                  </video>`;
+    }
+  }
+
+  if (text) {
+    content = `<p>${text}</p>` + content;
+  }
+
+  msg.innerHTML = `
+    ${content}
+    <div class="timestamp">${formatTime(createdAt)}</div>
+    ${isMine ? '<div class="you-label">You</div>' : ''}
+  `;
+
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+    function scrollToBottom() {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+ 
+
+  async function loadMessages() {
+  chatBox.innerHTML = "";
+  const res = await fetch(`http://localhost:4000/api/V1/chat/getMessage/${senderId}/${receiverId}`, {
+    method: "GET",
+    headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+  });
+
+  const messages = await res.json();
+  messages.forEach(msg => {
+    const isMine = msg.senderId.toString() === senderId;
+    displayMessage(isMine, msg.message, msg.createdAt, msg.mediaUrl, msg.mediaType);
+  });
+  scrollToBottom();
+}
+
+  sendBtn.addEventListener("click", async () => {
+  const text = input.value.trim();
+  const fileInput = document.getElementById("media-input");
+  const file = fileInput.files[0];
+
+  if (!text && !file) return;
+
+  const formData = new FormData();
+  formData.append("receiverId", receiverId);
+  if (text) formData.append("message", text);
+  if (file) formData.append("media", file);
+
+  try {
+    const res = await fetch("http://localhost:4000/api/V1/chat/sendMessage", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      const { newMessage } = data;
+      displayMessage(true, newMessage.message, newMessage.createdAt, newMessage.mediaUrl, newMessage.mediaType);
+      input.value = "";
+      fileInput.value = null;
+    } else {
+      alert(data.message || "Failed to send");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error sending message");
+  }
+});
+
+
+socket.on("privateMessage", ({ senderId: incomingSender, message, mediaUrl, mediaType, createdAt }) => {
+  if (incomingSender === receiverId) {
+    displayMessage(false, message, createdAt, mediaUrl, mediaType);
+    scrollToBottom();
+  }
+});
+
+
+    function selectGuardians(name, id, image) {
+      receiverId = id;
+      chatHeaderName.textContent = name;
+      chatHeaderImg.src = image || "https://via.placeholder.com/48?text=Dr";
+
+      localStorage.setItem("selectedguardian", JSON.stringify({ _id: id, name, image }));
+
+      loadMessages();
+    }
+
+    function renderGuardians(guardians) {
+        guardianList.innerHTML = "";
+        guardians.forEach((doc) => {
+        const div = document.createElement("div");
+        div.className = "guardian";
+        const img = document.createElement("img");
+        img.src = doc.image || "https://via.placeholder.com/48?text=Dr";
+        img.alt = doc.name;
+        div.appendChild(img);
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "name";
+        nameSpan.textContent = doc.name;
+
+    div.appendChild(img);
+    div.appendChild(nameSpan);
+
+    div.onclick = () => selectGuardians(doc.name, doc._id, doc.image);
+
+    guardianList.appendChild(div);
+  });
+
+    }
+
+
+    
+
+    async function getguardians() {
+  try {
+    const storedguardian = localStorage.getItem("guardianList");
+
+    let guardians;
+
+    if (storedguardian) {
+      doctors = JSON.parse(storedguardian);
+    } else {
+      const res = await fetch(`http://localhost:4000/api/V1/Guardian/getguardian`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      guardians = data.guardians;
+      console.log(data);
+
+      localStorage.setItem("guardianList", JSON.stringify(guardians));
+    }
+
+    renderGuardians(guardians);
+    const selectedguardian = localStorage.getItem("selectedguardian");
+
+if (selectedguardian) {
+  const guardian = JSON.parse(selectedguardian);
+  const foundguardian = guardians.find(d => d._id === guardians._id);
+  console.log(foundguardian);
+  if (foundguardian) {
+    selectGuardians(foundguardian.name, foundguardian._id, foundguardian.image);
+  }
+} else if (guardians.length > 0) {
+  const first = guardians[0];
+  selectGuardians(first.name, first._id, first.image);
+}
+
+  } catch (error) {
+    console.error("Failed to load doctors:", error);
+  }
+}
+
+getguardians();
+
+
+window.addEventListener("beforeunload", function () {
+  localStorage.removeItem("selectedguardian");
+  localStorage.removeItem("guardianList");
+});
+
+function goToProfile() {
+  if (receiverId) {
+    window.location.href = `viewotherprofile.html?id=${receiverId}`;
+  }
+}
+
+
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    sendBtn.click();
+  }
+});
+
+  </script>
+</body>
+</html>
+

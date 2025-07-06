@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Guardian Session Booking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <link rel="stylesheet" href="../assets/css/ExtraSession.css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+  <h1>🩺 Guardian Session Booking</h1>
+  <div class="container">
+    <label for="guardianSelect">Select Guardian:</label>
+    <select id="guardianSelect" onchange="fetchDepartments()">
+      <option value="">-- Choose Guardian --</option>
+    </select>
+
+    <label for="departmentSelect">Select Department:</label>
+    <select id="departmentSelect" onchange="fetchDoctors()">
+      <option value="">-- Choose Department --</option>
+    </select>
+
+    <label for="doctorSelect">Select Doctor:</label>
+    <select id="doctorSelect" onchange="fetchDoctorSchedule()">
+      <option value="">-- Choose Doctor --</option>
+    </select>
+
+    <div id="scheduleContainer"></div>
+    <div id="message" class="message"></div>
+  </div>
+
+ 
+  <script src="../api/ExtraSessions.js"></script> 
+  <script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

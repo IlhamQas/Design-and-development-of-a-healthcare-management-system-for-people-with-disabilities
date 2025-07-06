@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Notification</title>
+  <link rel="stylesheet" href="../assets/css/Notification(Admin).css">
+  <link rel="stylesheet" href="../assets/css/font.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Send Notification</h2>
+
+   <label for="title">titel:</label>
+  <textarea id="title" rows="2" placeholder="Type your title here..."></textarea>
+
+  <label for="message">Message:</label>
+  <textarea id="message" rows="6" placeholder="Type your message here..."></textarea>
+   
+ 
+  <label for="userIds">User IDs:</label>
+  <input type="text" id="userIds" placeholder="e.g., 645a1645a2019345">
+  
+  <label for="roles">Roles:</label>
+  <select id="roles" >
+    <option value="">-- Select Role --</option>
+    <option value="all">All Users</option>
+    <option value="guardian">Guardians</option>
+    <option value="specialist">Specialists</option>
+    <option value="admin">Mangers</option>
+    <option value="marketing_agents">Market Agents</option>
+  </select>
+    
+
+  <button onclick="sendNotification()">Send</button>
+  
+  <div id="response" class="response"></div>
+   <a href="../Html/notifications.html">All notification</a>
+</div>
+
+<script src="../api/notificationManag(Admin).js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const userIdsInput = document.getElementById("userIds");
+  const rolesSelect = document.getElementById("roles");
+
+  userIdsInput.addEventListener("input", () => {
+    if (userIdsInput.value.trim().length > 0) {
+      rolesSelect.disabled = true;
+    } else {
+      rolesSelect.disabled = false;
+    }
+  });
+
+  rolesSelect.addEventListener("change", () => {
+    if (rolesSelect.value !== "") {
+      userIdsInput.disabled = true;
+    } else {
+      userIdsInput.disabled = false;
+    }
+  });
+});
+</script>
+
+
+
+</body>
+</html>

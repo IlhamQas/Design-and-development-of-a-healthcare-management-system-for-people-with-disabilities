@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disorders and Special Conditions</title>
+    
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: cursive;
+    background-color: #f7f7f7;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.intro h2 {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.intro h2:hover {
+    transform: translateY(-5px);
+    color: #3498db;
+}
+
+.intro p {
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: color 0.3s ease;
+}
+
+.intro p:hover {
+    color: #2c3e50;
+}
+
+.disease-list {
+    margin-bottom: 40px;
+    animation: slideIn 1.5s ease-out;
+}
+
+.disease-list h3 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.disease-list ul {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0;
+    transition: transform 0.5s ease;
+}
+
+.disease-list li {
+    background: linear-gradient(135deg, #f0f1f6, #e1e5ea);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.disease-list li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.disease-list a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.disease-list a:hover {
+    color: #1abc9c;
+    transform: scale(1.1);
+}
+
+.diseases {
+    margin-bottom: 60px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.disease {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.disease:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.disease h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.disease p {
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.disease strong {
+    color: #3498db;
+}
+
+.disease p:last-child {
+    margin-bottom: 0;
+}
+
+.disease .tips {
+    background-color: #f9f9f9;
+    border-left: 4px solid #3498db;
+    padding-left: 15px;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.disease .tips p {
+    margin: 0;
+    padding: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .disease-list ul {
+        grid-template-columns: 1fr;
+    }
+
+    .intro h2 {
+        font-size: 30px;
+    }
+
+    .intro p {
+        font-size: 16px;
+    }
+
+    .disease-list a {
+        font-size: 16px;
+    }
+
+    .disease h2 {
+        font-size: 24px;
+    }
+
+    .disease p {
+        font-size: 14px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+
+<main>
+    <section class="intro">
+        <h2>Disorders and Special Conditions</h2>
+        <p>Children with special needs may experience various disorders that affect their development, learning, and social interactions. Early diagnosis and intervention are crucial to helping these children thrive in everyday life. It's important for both families and professionals to understand the symptoms and treatment methods to provide the best support.</p>
+    </section>
+
+    <section class="disease-list">
+        <h3>Click on a condition to learn more:</h3>
+        <ul>
+            <li><a href="#autism">Autism Spectrum Disorder (ASD)</a></li>
+            <li><a href="#learning-disabilities">Learning Disabilities</a></li>
+            <li><a href="#cerebral-palsy">Cerebral Palsy</a></li>
+            <li><a href="#asperger">Asperger Syndrome</a></li>
+            <li><a href="#adhd">Attention Deficit Hyperactivity Disorder (ADHD)</a></li>
+            <li><a href="#hearing-impairment">Hearing Impairment</a></li>
+            <li><a href="#intellectual-disability">Intellectual Disability</a></li>
+            <li><a href="#epilepsy">Epilepsy</a></li>
+            <li><a href="#muscle-spasms">Muscle Spasms</a></li>
+            <li><a href="#emotional-disturbance">Emotional Disturbance</a></li>
+            <li><a href="#down-syndrome">Down Syndrome</a></li>
+            <li><a href="#dyslexia">Dyslexia</a></li>
+            <li><a href="#developmental-delay">Developmental Delay</a></li>
+            <li><a href="#anxiety-disorders">Anxiety Disorders</a></li>
+            <li><a href="#depression">Depression</a></li>
+            <li><a href="#bipolar-disorder">Bipolar Disorder</a></li>
+            <li><a href="#schizophrenia">Schizophrenia</a></li>
+            <li><a href="#tourette-syndrome">Tourette Syndrome</a></li>
+            <li><a href="#fragile-x-syndrome">Fragile X Syndrome</a></li>
+            <li><a href="#sickle-cell-anemia">Sickle Cell Anemia</a></li>
+        </ul>
+    </section>
+
+    <section class="diseases">
+        
+        <div class="disease" id="autism">
+            <h2>1. Autism Spectrum Disorder (ASD)</h2>
+            <p><strong>Description:</strong><br>
+                Autism is a complex neurodevelopmental disorder that affects social interaction, communication, and behavior.
+                It typically appears in early childhood and varies widely in severity. The disorder is part of a spectrum,
+                meaning that individuals with ASD may experience different levels of impairment and strengths.
+            </p>
+
+            <p><strong>Symptoms:</strong><br>
+                Difficulty with social interactions, limited verbal communication, repetitive behaviors, and intense interest in specific topics.
+                Sensory sensitivities may also occur, including over-sensitivity to lights, sounds, or touch.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br>
+                Early diagnosis and intervention are crucial. Behavioral therapy (e.g., ABA),
+                 special education services, and support from caregivers help children with ASD develop social and communication skills.
+                  Medications may be prescribed to address co-occurring conditions like anxiety or hyperactivity.
+            </p>
+
+            <p><strong>Tips:</strong><br>
+                Create a structured routine, use visual supports like schedules and pictures,
+                and practice social skills through role-playing. Consistency and patience are key in supporting children with ASD.
+            </p>
+        </div>
+
+        
+        <div class="disease" id="learning-disabilities">
+            <h2>2. Learning Disabilities</h2>
+            <p><strong>Description:</strong><br>
+                Learning disabilities are neurological conditions that affect a child's ability to process information,
+                particularly in reading, writing, and math. This affects academic performance and daily activities.
+                Learning disabilities can be specific to one area, such as dyslexia (reading) or dyscalculia (math).
+            </p>
+
+            <p><strong>Symptoms:</strong> <br>
+                Difficulty in reading, writing, understanding math, and organizing tasks.
+                Children may also have trouble remembering instructions or completing tasks without frequent reminders.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Specialized educational techniques like multisensory teaching, individualized learning plans,
+                and tutoring can help. Involvement in activities that enhance cognitive function, 
+                such as brain exercises or educational games, also proves helpful.
+            </p>
+            
+            <p><strong>Tips:</strong> <br>
+                Break tasks into manageable steps, use visual aids, and provide consistent positive reinforcement. 
+                It’s essential to remain patient and understand the unique learning needs of each child.
+            </p>
+        </div>
+
+        
+        <div class="disease" id="cerebral-palsy">
+            <h2>3. Cerebral Palsy</h2>
+            <p><strong>Description:</strong><br> 
+                Cerebral palsy (CP) is a group of disorders that affect movement, muscle tone, 
+                and posture due to brain injury or malformation, often occurring during pregnancy or shortly after birth. 
+                CP can also affect fine motor skills, balance, and coordination.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty controlling movement, muscle stiffness or weakness, poor coordination, and other motor impairments. 
+                Children may have difficulty with activities like walking, sitting, or swallowing.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Early physical therapy, occupational therapy, and speech therapy are essential to improve motor skills 
+                and communication abilities. Medications may help control muscle spasticity, and surgical interventions may be 
+                needed in severe cases.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage physical activity to improve strength, and use adaptive equipment (e.g., wheelchairs, braces) to aid mobility. 
+                Work closely with therapists to develop a comprehensive treatment plan.
+            </p>
+        </div>
+
+        <div class="disease" id="asperger">
+            <h2>4. Asperger Syndrome (High-Functioning Autism)</h2>
+            <p><strong>Description:</strong><br> 
+                Asperger syndrome is a form of autism spectrum disorder. Individuals with this condition often have average 
+                or above-average intelligence and do not have significant delays in language development, 
+                but struggle with social interactions and understanding social cues.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty understanding social cues, excessive talking about specific interests, 
+                lack of non-verbal communication skills, and challenges with empathy.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Social skills training, behavior therapy, and therapy focused on improving communication and emotional regulation. 
+                Support from family members and educators is essential for success.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage participation in social activities, provide clear and direct communication, 
+                and offer structured environments to reduce anxiety.
+            </p>
+        </div>
+
+        <div class="disease" id="adhd">
+            <h2>5. Attention Deficit Hyperactivity Disorder (ADHD)</h2>
+            <p><strong>Description:</strong><br> 
+                ADHD is a neurological condition characterized by inattention, hyperactivity, and impulsive behavior. 
+                It often appears in childhood and can persist into adolescence and adulthood. 
+                Children with ADHD may struggle to focus, follow instructions, and regulate their emotions.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty focusing, excessive movement, impulsiveness, difficulty organizing tasks, and mood swings.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Behavioral therapy, medication (such as stimulants or non-stimulants), 
+                and modifications to the environment (e.g., reducing distractions) can help manage symptoms.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Provide clear, simple instructions, establish a consistent routine, 
+                and create an organized and distraction-free study environment.
+            </p>
+        </div>
+
+        <div class="disease" id="hearing-impairment">
+            <h2>6. Hearing Impairment</h2>
+            <p><strong>Description:</strong><br> 
+                Hearing impairment refers to partial or total inability to hear. 
+                It can be present from birth or develop over time due to injury or illness. 
+                Children with hearing impairment may have trouble speaking or understanding speech.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty hearing speech, trouble following conversations, speech delays, 
+                and needing to increase the volume on electronic devices.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Early diagnosis and the use of hearing aids or cochlear implants can help. 
+                Speech therapy and language development programs are also crucial for children with hearing impairments.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage sign language and visual communication, use technology like hearing aids, 
+                and create an environment with minimal background noise to aid hearing.
+            </p>
+        </div>
+
+        <div class="disease" id="intellectual-disability">
+            <h2>7. Intellectual Disability</h2>
+            <p><strong>Description:</strong><br> 
+                Intellectual disability is characterized by below-average intellectual functioning, 
+                with limitations in adaptive behaviors such as communication, social skills, and daily living activities.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty with problem-solving, limited language skills, challenges in learning new concepts, 
+                and difficulty with basic life skills.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Special education, speech and language therapy, and occupational therapy can help children develop their skills. 
+                Encouraging independence and providing a structured, supportive environment are key.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Use visual cues and simple instructions, and provide opportunities for the child to practice daily living skills.
+            </p>
+        </div>
+
+        <div class="disease" id="epilepsy">
+            <h2>8. Epilepsy</h2>
+            <p><strong>Description:</strong><br> 
+                Epilepsy is a neurological disorder characterized by recurrent seizures. 
+                Seizures occur due to abnormal electrical activity in the brain. The condition may be caused by 
+                genetic factors, head injuries, or infections.
+            </p>
+           
+            <p><strong>Symptoms:</strong><br> 
+                Sudden jerking movements, loss of consciousness, staring spells, and confusion after a seizure.
+            </p>
+           
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Medication is the primary treatment for epilepsy. In some cases, 
+                surgery may be necessary to remove areas of the brain that cause seizures. 
+                Lifestyle adjustments like sleep routines can also help manage the condition.
+            </p>
+           
+            <p><strong>Tips:</strong><br> 
+                Ensure the child’s safety during a seizure, avoid triggers like flashing lights or stress, 
+                and keep a seizure diary to track patterns and treatment effectiveness.
+            </p>
+        </div>
+
+        <div class="disease" id="muscle-spasms">
+            <h2>9. Muscle Spasms</h2>
+            <p><strong>Description:</strong><br> 
+                Muscle spasms are sudden, involuntary contractions of a muscle or group of muscles. 
+                They can be painful and may be caused by dehydration, muscle fatigue, or neurological conditions.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Muscle stiffness, pain, and twitching. Spasms may last for a few seconds or several minutes.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Stretching, applying heat or cold, and ensuring adequate hydration can help relieve spasms. 
+                In some cases, muscle relaxants may be prescribed.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage regular exercise to prevent muscle stiffness and dehydration, 
+                and teach relaxation techniques to help reduce muscle tension.
+            </p>
+        </div>
+
+        <div class="disease" id="emotional-disturbance">
+            <h2>10. Emotional Disturbance</h2>
+            <p><strong>Description:</strong><br> 
+                Emotional disturbance refers to a condition where a child experiences difficulty in emotional regulation, 
+                leading to frequent mood swings, aggression, and difficulty maintaining relationships.
+            </p>
+           
+            <p><strong>Symptoms:</strong><br> 
+                Anxiety, depression, mood swings, anger management issues, and difficulty interacting with peers.
+            </p>
+           
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Therapy, including cognitive-behavioral therapy (CBT), and medication may be helpful. 
+                Creating a calm and structured environment can also be beneficial for emotional stability.
+            </p>
+           
+            <p><strong>Tips:</strong><br> 
+                Encourage positive social interactions, establish clear boundaries and expectations, 
+                and help the child develop coping mechanisms for stress.
+            </p>
+        </div>
+
+        <div class="disease" id="down-syndrome">
+            <h2>11. Down Syndrome</h2>
+            <p><strong>Description:</strong><br> 
+                Down syndrome is a genetic disorder caused by the presence of an extra copy of chromosome 21. 
+                It is associated with developmental delays, intellectual disability, and physical traits like a flat 
+                facial profile and almond-shaped eyes.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Delayed milestones such as walking and talking, intellectual disability, and specific physical traits.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Early intervention, speech therapy, physical therapy, and special education programs are crucial for improving development.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage social engagement, use visual aids, and celebrate small achievements to boost self-esteem.
+            </p>
+        </div>
+
+        <div class="disease" id="dyslexia">
+            <h2>12. Dyslexia</h2>
+            <p><strong>Description:</strong><br> 
+                Dyslexia is a specific learning disability that affects reading, spelling, and writing. 
+                It is a neurological condition that makes it difficult to decode words, spell correctly, 
+                and process written text, despite having normal intelligence.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Difficulty recognizing words, reading fluency, poor spelling, and problems with decoding or writing words correctly.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Specialized reading programs, such as phonics-based programs, and interventions like tutoring can help. 
+                It’s important to work with educators to provide a tailored approach to learning.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Use audiobooks and text-to-speech technology, break reading assignments into smaller sections, 
+                and encourage the use of visual aids and colored overlays to reduce visual strain.
+            </p>
+        </div>
+
+        <div class="disease" id="developmental-delay">
+            <h2>13. Developmental Delay</h2>
+            <p><strong>Description:</strong><br> 
+                Developmental delay refers to a significant delay in one or more areas of a child's development, 
+                such as speech, motor skills, or social skills. This delay may indicate the presence of an underlying 
+                condition or developmental disorder.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Delays in achieving developmental milestones, such as walking, speaking, or socializing with peers. 
+                These delays may be mild to severe depending on the cause.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Early intervention with speech therapy, physical therapy, and other specialized therapies can significantly help. 
+                A team approach with healthcare providers is often required to ensure the child receives the necessary support.
+            </p>
+           
+            <p><strong>Tips:</strong><br> 
+                Encourage interaction with peers, provide sensory stimulation, and work closely with therapists to 
+                develop personalized developmental goals.
+            </p>
+        </div>
+
+        <div class="disease" id="anxiety-disorders">
+            <h2>14. Anxiety Disorders</h2>
+            <p><strong>Description:</strong><br> 
+                Anxiety disorders are characterized by excessive fear, worry, and nervousness that affect a child's 
+                ability to function in daily life. These disorders may include generalized anxiety disorder (GAD), 
+                panic disorder, or social anxiety disorder.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Persistent worry, irritability, avoidance of social situations, restlessness, 
+                and physical symptoms such as stomachaches or headaches.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Therapy, particularly cognitive-behavioral therapy (CBT), can help children identify and manage their anxiety. 
+                Relaxation techniques and mindfulness exercises are also helpful for reducing anxiety symptoms.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Maintain a predictable routine, use relaxation techniques such as deep breathing or progressive muscle relaxation, 
+                and create a calm environment to reduce stress.
+            </p>
+        </div>
+
+        <div class="disease" id="depression">
+            <h2>15. Depression</h2>
+            <p><strong>Description:</strong><br> 
+                Depression is a mood disorder that causes persistent feelings of sadness, hopelessness, 
+                and a lack of interest in daily activities. It can affect children and adolescents, leading to difficulties in school, 
+                relationships, and self-esteem.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Persistent sadness, loss of interest in activities, changes in appetite or sleep, feelings of worthlessness, 
+                and thoughts of death or suicide.
+            </p>
+        
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Therapy, including CBT or play therapy for younger children, and medication (antidepressants) may be used. 
+                It is important to create a supportive and open environment for the child to express their feelings.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Foster open communication, encourage physical activity and social interaction, 
+                and ensure the child maintains a routine to provide structure and stability.
+            </p>
+        </div>
+
+        <div class="disease" id="bipolar-disorder">
+            <h2>16. Bipolar Disorder</h2>
+            <p><strong>Description:</strong><br> 
+                Bipolar disorder is a mood disorder characterized by extreme mood swings, 
+                including manic episodes (elevated mood, energy) and depressive episodes (low mood, fatigue). 
+                This condition can affect behavior, energy levels, and the ability to function in daily life.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Mania, including high energy, rapid speech, and impulsive behavior, followed by depressive episodes, 
+                including sadness, hopelessness, and lack of interest in daily activities.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Bipolar disorder is often managed with mood-stabilizing medications and therapy. 
+                Family support is crucial, as understanding and managing the triggers and symptoms of mood swings can improve outcomes.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Ensure a consistent routine, provide emotional support during mood swings, 
+                and work with healthcare professionals to adjust medication and therapeutic strategies as needed.
+            </p>
+        </div>
+
+        <div class="disease" id="schizophrenia">
+            <h2>17. Schizophrenia</h2>
+            <p><strong>Description:</strong><br> 
+                Schizophrenia is a serious mental health disorder that affects how a person thinks, feels, and behaves. 
+                It may cause hallucinations, delusions, and disorganized thinking. Schizophrenia typically appears in late 
+                adolescence or early adulthood.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Hallucinations (seeing or hearing things that are not there), delusions (false beliefs), 
+                disorganized thinking, and difficulty functioning in daily life.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Treatment typically involves antipsychotic medications and therapy, including cognitive therapy. 
+                Early intervention is important for managing the symptoms and improving quality of life.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Create a calm and supportive environment, encourage regular therapy sessions, 
+                and provide assistance with social skills and day-to-day activities.
+            </p>
+        </div>
+
+        <div class="disease" id="tourette-syndrome">
+            <h2>18. Tourette Syndrome</h2>
+            <p><strong>Description:</strong><br> 
+                Tourette syndrome is a neurological disorder characterized by repetitive, 
+                involuntary movements and vocalizations called tics. Tics can range from mild to 
+                severe and may worsen during times of stress.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Involuntary motor tics (e.g., blinking, head jerking) and vocal tics (e.g., throat clearing, shouting). 
+                These tics often worsen during stress or excitement.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Most cases of Tourette syndrome improve with age, and therapy can help children learn to manage their tics. 
+                Medication may be prescribed for severe cases to reduce tics or other symptoms like anxiety.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage relaxation techniques and stress management, avoid triggers that may cause tics, 
+                and educate others about the condition to reduce stigma.
+            </p>
+        </div>
+
+        <div class="disease" id="fragile-x-syndrome">
+            <h2>19. Fragile X Syndrome</h2>
+            <p><strong>Description:</strong><br> 
+                Fragile X syndrome is a genetic condition that causes intellectual disability and is the most common inherited 
+                cause of developmental delay. It affects both males and females, though it is more severe in males.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Intellectual disabilities, hyperactivity, impulsive behavior, speech delays, and social anxiety. 
+                Children with Fragile X syndrome may also exhibit repetitive behaviors or sensitivities to sensory stimuli.
+            </p>
+            
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Early intervention with speech and occupational therapy can help children develop language, 
+                motor skills, and social skills. Behavior management techniques can help reduce hyperactivity and impulsivity.
+            </p>
+            
+            <p><strong>Tips:</strong><br> 
+                Encourage structured activities, minimize sensory overload, and provide positive reinforcement for appropriate behaviors.
+            </p>
+        </div>
+
+        <div class="disease" id="sickle-cell-anemia">
+            <h2>20. Sickle Cell Anemia</h2>
+            <p><strong>Description:</strong><br> 
+                Sickle cell anemia is a genetic blood disorder that causes red blood cells to become rigid and shaped like 
+                a crescent or "sickle." This can block blood flow, leading to pain and organ damage.
+            </p>
+            
+            <p><strong>Symptoms:</strong><br> 
+                Pain episodes, anemia (fatigue), delayed growth, frequent infections, and swelling in the hands and feet.
+            </p>
+           
+            <p><strong>How to Deal with the Condition:</strong><br> 
+                Pain management, blood transfusions, and medication to reduce the frequency of sickle cell crises. 
+                Regular check-ups with a healthcare provider are essential to managing the condition.
+            </p>
+           
+            <p><strong>Tips:</strong><br> 
+                Encourage hydration, promote a healthy diet, and educate the child on how to manage pain and symptoms. 
+                Avoid extreme temperatures and dehydration to prevent crises.
+            </p>
+        </div>
+
+    </section>
+</main>
+
+</body>
+</html>
+

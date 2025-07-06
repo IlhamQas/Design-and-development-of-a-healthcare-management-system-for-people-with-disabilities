@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Records</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef2f3;
+      padding: 40px 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00796b;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #00796b;
+      color: white;
+      padding: 10px 18px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #005c4f;
+      transform: scale(1.03);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: center;
+      font-size: 1.05em;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #009688;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+  
+#balanceModal {
+  display: none; 
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+    .modal-content {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content h2 {
+      font-size: 1.6rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .balance-amount {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #27ae60;
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      background-color: #777;
+    }
+
+    .close-btn:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <button class="btn" onclick="openBalanceModal()">View Balance</button>
+  </div>
+
+  <h1>Payment Records</h1>
+
+  <table id="paymentTable">
+    <thead>
+      <tr>
+        <th>Payment Date</th>
+        <th>User ID</th>
+        <th>Amount Paid</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- Modal -->
+  <div id="balanceModal">
+    <div class="modal-content">
+      <h2>Your Current Balance</h2>
+      <div class="balance-amount" id="balanceAmount">₪0.00</div>
+      <button class="btn close-btn" onclick="closeBalanceModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    async function loadPayments() {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch("http://localhost:4000/api/v1/financial/find", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) throw new Error("Failed to load records.");
+        const data = await res.json();
+        const tableBody = document.querySelector("#paymentTable tbody");
+        tableBody.innerHTML = "";
+
+        if (Array.isArray(data.records)) {
+          data.records.forEach(record => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${new Date(record.createdAt).toLocaleDateString()}</td>
+              <td>${record.userId}</td>
+              <td>${record.amount} ₪</td>
+              <td>${record.type}</td>
+            `;
+            tableBody.appendChild(row);
+          });
+        } else {
+          tableBody.innerHTML = "<tr><td colspan='4'>No records found.</td></tr>";
+        }
+      } catch (err) {
+        console.error("Error loading records:", err);
+      }
+    }
+
+    function openBalanceModal() {
+  try {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const balance = typeof user?.balance === 'number' ? user.balance : 0;
+    document.getElementById("balanceAmount").textContent = `₪${balance.toFixed(2)}`;
+    document.getElementById("balanceModal").style.display = "flex";
+  } catch (e) {
+    document.getElementById("balanceAmount").textContent = "Error";
+    document.getElementById("balanceModal").style.display = "flex";
+  }
+}
+
+
+    function closeBalanceModal() {
+      document.getElementById("balanceModal").style.display = "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", loadPayments);
+  </script>
+
+</body>
+</html>

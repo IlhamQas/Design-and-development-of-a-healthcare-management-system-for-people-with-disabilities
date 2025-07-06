@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Management</title>
+  <link rel="stylesheet" href="../assets/css/profilePage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+  <div id="status-message"></div>
+
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-left">
+        <a class="nav-logo">
+          <i class="fas fa-leaf"></i> MyProfile
+        </a>
+      </div>
+      <div class="navbar-right">
+        <a onclick="Dashboard()" title="Home"><i class="fas fa-home"></i></a>
+        <a href="../Html/UserprofilePage.html" title="Profile"><i class="fas fa-user-circle"></i></a>
+        <a href="../Html/AccountSetting.html" title="Settings"><i class="fas fa-cog"></i></a>
+        <a href="../Html/AllChat.html" title="Messages"><i class="fas fa-envelope"></i> </a>
+        <a href="../Html/notifications.html" title="Notifications"><i class="fas fa-bell"></i> </a> 
+         <a onclick="logout()" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+      </div>
+    </div>
+  </header>
+  
+  
+
+  <div class="container">
+    <div id="profile-section">
+      <div id="pagecontainer" class="profile-container">
+        <div class="profile-row">
+          <div>
+            <img alt="Profile Image" class="profile-img" id="profile-img" onclick="openModal()">
+          </div>
+          <div class="profile-info-container1">
+            <div class="profile-info">
+              <h2 id="user-profile-name"></h2>
+              <strong><p id="@userName"></p></strong>
+              <p id="bio"></p>
+              <p><i class="fas fa-envelope"></i><span id="email"></span></p>
+              <p><i class="fas fa-phone"></i><span id="phone"></span></p>
+              <p><i class="fas fa-map-marker-alt"></i><span id="address"></span></p>
+            </div>
+            <div class="profile-info-btns">
+              <button onclick="window.location.href='../Html/EditProfile.html'">Edit Profile</button>
+              <button style="background-color: white; color: #406185;" onclick="window.location.href='../Html/AccountSetting.html'">Account Setting</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-container">
+      <div class="card">  
+        <h3>Basic Information</h3>
+          <p><strong>Specialization:</strong> <span id="specialization"></span></p>
+          <p><strong>Workplace: </strong> <span id="workplace"></span></p>
+          <p><strong>created At: </strong> <span id="createdAt"></span></p>
+          <p><strong>status: </strong> <span id="status"></span></p>
+       
+        <button id="edit-profile" class="hidden">Add Profile</button>
+      </div>
+
+      <p id="message"></p>
+    </div>
+
+    <div id="extra-data" class="card-container" style="margin-top: 40px;">
+      <!-- Cards will be appended here dynamically -->
+    </div>
+  </div>
+
+  <!-- Profile Completion Modal -->
+  <div class="modal-overlay hidden" id="completeProfileModal">
+    <div class="modal-content">
+      <h2>Complete Your Profile</h2>
+      <form id="profile-form">
+        <input type="text" id="input-phone" placeholder="Phone Number" required>
+        <input type="text" id="input-address" placeholder="Address" required>
+        <input type="text" id="input-bio" placeholder="About You" required>
+        <input type="text" id="input-specialization" placeholder="Specialization">
+        <input type="text" id="input-workplace" placeholder="Workplace">
+        <button type="submit">Save Profile</button>
+      </form>
+      <p id="message"></p>
+    </div>
+  </div>
+
+  <!-- Profile Image Modal -->
+  <div class="modal-overlay hidden" id="imageModalOverlay">
+    <div class="modal-content" style="position: relative;">
+      <span class="close-btn" onclick="closeImageModal()">&times;</span>
+      <h3>Profile Image</h3>
+      <img id="modalImage" src="" alt="Profile Image" style="max-width: 100%; border-radius: 10px; margin: 20px 0;">
+      <button onclick="triggerImageUpload()">Change Profile Photo</button>
+    </div>
+  </div>
+
+  <input type="file" id="hidden-file-input" accept="image/*" class="hidden" onchange="uploadNewPhoto()">
+  
+  <script src="../assets/js/userProfile.js"></script>
+  <script src="../api/completProfile.js"></script>
+  <script src="../assets/js/logout.js"></script>
+  <script>
+
+function Dashboard() {
+  const user = localStorage.getItem('user');
+  if (!user) return;
+
+  try {
+    const parsedUser = JSON.parse(user); 
+    if (parsedUser && parsedUser.role) {
+      redirectToDashboard(parsedUser.role);
+    }
+  } catch (e) {
+    console.error("Failed to parse user from localStorage", e);
+  }
+}
+
+  </script>
+</body>
+</html>

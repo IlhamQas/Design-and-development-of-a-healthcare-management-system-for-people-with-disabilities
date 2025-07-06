@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Previous Sessions</title>
+  <link rel="stylesheet" href="../assets/css/previosSession.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Previous Sessions</h2>
+
+    <div class="filter">
+      <select id="departmentFilter">
+        <option value="All">All Departments</option>
+      </select>
+    </div>
+
+    <table id="notesTable">
+      <thead>
+        <tr>
+          <th>Doctor</th>
+          <th>Department</th>
+          <th>Note</th>
+          <th>Date</th>
+          <th>Rating</th>
+          <th>Media</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="noNotes" class="no-notes" style="display:none;">No notes found.</div>
+  </div>
+
+  
+  <div id="mediaModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modalImage" src="" alt="Session Media" />
+    </div>
+  </div>
+
+  <script src="../api/previosSession.js"></script>
+</body>
+</html>

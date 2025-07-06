@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Report</title>
+    <link rel="stylesheet" href="../assets/css/CreateReport.css">
+</head>
+<body>
+    <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+    
+    <div class="container">
+        <h2>Evaluation Report</h2>
+
+        <form action="#" method="post">
+            
+            <label for="name">الأخصائي:</label>
+            <input type="text" id="specialist-name" readonly>
+
+            <label for="dob">تاريخ الميلاد:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="report-date">تاريخ التقرير:</label>
+            <input type="date" id="report-date" name="report-date" required>
+
+            <h3>لمن يهمه الأمر</h3>
+            <p>
+                حضر/ت الطفل/ة <input type="text" id="child-name" name="child-name" required placeholder="اسم الطفل/ة" readonly> 
+                إلى مركز سكاي مديكال، وقمنا بإجراء تقييم شامل لجميع الجوانب التطورية، وتبين خلاله ما يلي:
+            </p>
+
+            <label for="motor-skills-large">المهارات الحركية الكبيرة:</label><br>
+            <input type="text" id="motor-skills-large" name="motor-skills-large" required><br><br>
+
+            <label for="motor-skills-fine">المهارات الحركية الدقيقة:</label><br>
+            <input type="text" id="motor-skills-fine" name="motor-skills-fine" required><br><br>
+
+            <label for="self-care-skills">مهارات العناية الذاتية:</label><br>
+            <input type="text" id="self-care-skills" name="self-care-skills" required><br><br>
+
+            <label for="cognitive-skills">المهارات الإدراكية المعرفية:</label><br>
+            <input type="text" id="cognitive-skills" name="cognitive-skills" required><br><br>
+
+            <label for="social-behavior-skills">المهارات الاجتماعية السلوكية:</label><br>
+            <input type="text" id="social-behavior-skills" name="social-behavior-skills" required><br><br>
+
+            <label for="recommendations">التوصيات:</label><br>
+            <input type="text" id="recommendations" name="recommendations" required><br><br>
+
+            <div class="button-container">
+                <button type="button" id="submit-btn" onclick="sendReport()">Send Report</button>
+                <button type="button" onclick="fetchReports()">View Previous Report</button>
+
+            </div>
+        </form>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+                <h3>جميع التقارير السابقة</h3>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+        
+</div>
+
+    </div>   
+
+ 
+<script src="../api/CreateReport.js"></script>
+<script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

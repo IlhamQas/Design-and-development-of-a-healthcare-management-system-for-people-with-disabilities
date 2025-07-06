@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Users List</title>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="../assets/css/userlist.css">
+        <link rel="stylesheet" href="../assets/css/font.css">
+    </head>
+    <body>
+        <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+        padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+        
+        <h1>Users List</h1>
+        <button onclick="goBack()" class="back">Back <i
+                class="fa-solid fa-arrow-left"></i> </button>
+        <div class="container">
+            <h3>Mangers</h3>
+            <div id="managersContainer"></div>
+
+            <h3>specialists</h3>
+            <div id="specialistsContainer"></div>
+
+            <h3>guardians</h3>
+            <div id="guardiansContainer"></div>
+
+            <h3>marketing agents</h3>
+            <div id="marketingagentsContainer"></div>
+        </div>
+        <script src="../api/UserList(admin).js"></script>
+        <script src="../assets/js/apimessages.js"></script>
+    </body>
+</html>

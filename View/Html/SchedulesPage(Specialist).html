@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctor Weekly Schedule</title>
+  <link rel="stylesheet" href="../assets/css/SchedulesPage(specialist).css">
+</head>
+<body>
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+  
+  <h1>Doctor's Weekly Schedule</h1>
+  <div class="schedule-grid" id="schedule"></div>
+
+  <!-- Modal -->
+  <div id="sessionModal">
+    <div class="modal-box">
+      <button id="closeBtn" onclick="closeModal()">❌</button>
+      <h2>Session Details</h2>
+      <div id="modalContent"></div>
+      <div id="noteSection"></div>
+    </div>
+  </div>
+
+  <script src="../api/SchedulesPage(Specialist).js"></script>
+  <script src="../assets/js/apimessages.js"></script>
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نموذج تقييم الطفل - مركز سكاي</title>
+  <link rel="stylesheet" href="../assets/css/createEvaluation.css">
+</head>
+<body>
+
+  <div id="status-message" style="display:none; position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+  padding: 12px 20px; border-radius: 8px; text-align: center; font-weight: bold; z-index: 9999; font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);"></div>
+
+<div class="logo-container">
+    <img src="../assets/images/med 1.png" alt="شعار مركز سكاي" class="logo-img" />
+<h2 class="logo">نموذج تقييم الطفل - مركز سكاي</h2>
+</div>
+<form id="evaluationForm">
+
+  <fieldset>
+    <legend>بيانات الطفل</legend>
+
+    <div id="guardianIdInputWrapper" style="display: none;">
+        <label for="guardianId">رقم تعريف الوصي:</label>
+        <input type="text" id="guardianId" name="guardianId" placeholder="أدخل رقم التعريف">
+    </div>
+
+    <label for="child_fullName">الاسم الكامل:</label>
+    <input type="text" id="child_fullName" name="child_fullName" required />
+
+    <label for="child_age">العمر (بالسنوات):</label>
+    <input type="number" id="child_age" name="child_age" min="0" required />
+
+    <label for="child_birthDate">تاريخ الميلاد:</label>
+    <input type="date" id="child_birthDate" name="child_birthDate" required />
+
+    <label for="child_birthPlace">مكان الميلاد:</label>
+    <input type="text" id="child_birthPlace" name="child_birthPlace" />
+
+    <label for="child_gender">الجنس:</label>
+    <select id="child_gender" name="child_gender" required>
+      <option value="">اختر</option>
+      <option value="male">ذكر</option>
+      <option value="female">أنثى</option>
+    </select>
+
+    <label for="child_homePhone">هاتف المنزل:</label>
+    <input type="tel" id="child_homePhone" name="child_homePhone" />
+
+    <label for="child_address">العنوان:</label>
+    <textarea id="child_address" name="child_address"></textarea>
+
+    <label for="child_referralSource">مصدر الإحالة:</label>
+    <input type="text" id="child_referralSource" name="child_referralSource" />
+
+    <label for="child_schoolName">اسم المدرسة:</label>
+    <input type="text" id="child_schoolName" name="child_schoolName" />
+
+    <label for="child_gradeLevel">الصف الدراسي:</label>
+    <input type="text" id="child_gradeLevel" name="child_gradeLevel" />
+  </fieldset>
+
+  <!-- بيانات الأهل -->
+  <fieldset>
+    <legend>بيانات الأهل</legend>
+    <label for="parents_motherName">اسم الأم:</label>
+    <input type="text" id="parents_motherName" name="parents_motherName" />
+
+    <label for="parents_fatherName">اسم الأب:</label>
+    <input type="text" id="parents_fatherName" name="parents_fatherName" />
+
+    <label for="parents_motherEducation">تعليم الأم:</label>
+    <input type="text" id="parents_motherEducation" name="parents_motherEducation" />
+
+    <label for="parents_fatherEducation">تعليم الأب:</label>
+    <input type="text" id="parents_fatherEducation" name="parents_fatherEducation" />
+
+    <label for="parents_motherJob">وظيفة الأم:</label>
+    <input type="text" id="parents_motherJob" name="parents_motherJob" />
+
+    <label for="parents_fatherJob">وظيفة الأب:</label>
+    <input type="text" id="parents_fatherJob" name="parents_fatherJob" />
+
+    <label for="parents_motherMobile">موبايل الأم:</label>
+    <input type="tel" id="parents_motherMobile" name="parents_motherMobile" />
+
+    <label for="parents_fatherMobile">موبايل الأب:</label>
+    <input type="tel" id="parents_fatherMobile" name="parents_fatherMobile" />
+
+    <label for="parents_motherWorkplace">مكان عمل الأم:</label>
+    <input type="text" id="parents_motherWorkplace" name="parents_motherWorkplace" />
+
+    <label for="parents_fatherWorkplace">مكان عمل الأب:</label>
+    <input type="text" id="parents_fatherWorkplace" name="parents_fatherWorkplace" />
+  </fieldset>
+
+  <!-- معلومات الأسرة -->
+  <fieldset>
+    <legend>معلومات الأسرة</legend>
+    <label for="family_parentRelationship">علاقة الوالدين:</label>
+    <input type="text" id="family_parentRelationship" name="family_parentRelationship" />
+
+    <label for="family_speechProblems">مشاكل نطق:</label>
+    <input type="text" id="family_speechProblems" name="family_speechProblems" />
+  </fieldset>
+
+  <!-- مراحل النمو -->
+  <fieldset>
+    <legend>مراحل النمو</legend>
+    <label for="development_motherAgeDuringPregnancy">عمر الأم أثناء الحمل:</label>
+    <input type="number" id="development_motherAgeDuringPregnancy" name="development_motherAgeDuringPregnancy" min="0" />
+
+    <label for="development_motherSmoker">هل الأم مدخنة؟</label>
+    <select id="development_motherSmoker" name="development_motherSmoker">
+      <option value="">اختر</option>
+      <option value="yes">نعم</option>
+      <option value="no">لا</option>
+    </select>
+
+    <label for="development_miscarriages">هل حصلت إجهاضات؟</label>
+    <select id="development_miscarriages" name="development_miscarriages">
+      <option value="">اختر</option>
+      <option value="yes">نعم</option>
+      <option value="no">لا</option>
+    </select>
+
+    <label for="development_pregnancyDuration">مدة الحمل:</label>
+    <input type="text" id="development_pregnancyDuration" name="development_pregnancyDuration" />
+
+    <label for="development_motherPregnancyProblems">مشاكل أثناء الحمل:</label>
+    <textarea id="development_motherPregnancyProblems" name="development_motherPregnancyProblems"></textarea>
+
+    <label for="development_fetusProblems">مشاكل الجنين:</label>
+    <textarea id="development_fetusProblems" name="development_fetusProblems"></textarea>
+  </fieldset>
+
+  <!-- ما بعد الولادة -->
+  <fieldset>
+    <legend>ما بعد الولادة</legend>
+    <label for="postBirth_birthType">نوع الولادة:</label>
+    <select id="postBirth_birthType" name="postBirth_birthType">
+      <option value="">اختر</option>
+      <option value="cesarean">قيصرية</option>
+      <option value="natural">طبيعية</option>
+      <option value="mixed">مختلطة</option>
+    </select>
+
+    <label for="postBirth_birthWeight">وزن الولادة (كجم):</label>
+    <input type="number" id="postBirth_birthWeight" name="postBirth_birthWeight" min="0" step="0.01" />
+
+    <label for="postBirth_birthProblems">مشاكل الولادة:</label>
+    <textarea id="postBirth_birthProblems" name="postBirth_birthProblems"></textarea>
+
+    <label for="postBirth_feedingType">نوع الرضاعة:</label>
+    <input type="text" id="postBirth_feedingType" name="postBirth_feedingType" />
+
+    <label for="surgery_type">ما نوع العملية الجراحية؟ متى أجريت؟</label>
+    <textarea id="surgery_type" name="surgery_type"></textarea>
+
+    <label for="surgery_result">ماذا كانت نتيجة العملية؟ وهل مكث في المستشفى؟</label>
+    <textarea id="surgery_result" name="surgery_result"></textarea>
+
+    <label for="medications">هل يتناول الطفل أي أدوية؟</label>
+    <input type="text" id="medications" name="medications">
+  </fieldset>
+
+  <!-- بيانات الإخوة - جدول وإضافة ديناميكية -->
+  <fieldset>
+    <legend>بيانات الإخوة</legend>
+    <table id="siblingsTable">
+      <thead>
+        <tr>
+          <th>الاسم</th>
+          <th>العمر</th>
+          <th>ملاحظات</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- الصفوف المضافة ديناميكياً -->
+      </tbody>
+    </table>
+    <button type="button" onclick="addSibling()">إضافة أخ/أخت</button>
+  </fieldset>
+
+  <!-- الأمراض -->
+  <fieldset>
+    <legend>الأمراض</legend>
+    <table id="diseasesTable">
+      <thead>
+        <tr>
+          <th>اسم المرض</th>
+          <th>هل يعاني المرض؟</th>
+          <th>ملاحظات</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button title="الحساسية، جدري الماء،
+     الحرارة المزمنة، الغدة الدرقية
+    ، استئصال اللوزتين، السحايا،
+     التهاب رئوي حاد، الحصبة،
+     التهاب الجيوب الأنفية،
+     التهاب الأذن،
+     التشنجات" type="button" onclick="addDisease()">إضافة مرض</button>
+  </fieldset>
+  
+
+
+
+  <!-- 6. التطور الحركي -->
+  <fieldset>
+  <legend>التطور الحركي</legend>
+  <br>
+
+  <div class="skill">
+      <label for="head_lift">في أي عمر كان يرتفع رأس الطفل، علمًا أن العمر الافتراضي هو 4 شهور؟</label>
+      <input type="text" id="head_lift" name="head_lift">
+  </div>
+
+  <div class="skill">
+      <label for="crawling">في أي عمر كان الطفل يزحف، علمًا أن العمر الافتراضي هو من 8 إلى 9 شهور؟</label>
+      <input type="text" id="crawling" name="crawling">
+  </div>
+
+  <div class="skill">
+      <label for="sitting">في أي عمر كان الطفل يجلس لوحده، علمًا أن العمر الافتراضي هو من 6 شهور إلى 8 شهور؟</label>
+      <input type="text" id="sitting" name="sitting">
+  </div>
+
+  <div class="skill">
+      <label for="standing">في أي عمر كان الطفل يقف لوحده، علمًا أن العمر الافتراضي هو من 8 شهور إلى 12 شهر؟</label>
+      <input type="text" id="standing" name="standing">
+  </div>
+
+  <div class="skill">
+      <label for="walking">في أي عمر كان الطفل يمشي لوحده، علمًا أن العمر الافتراضي هو من 12 شهر إلى 18 شهر؟</label>
+      <input type="text" id="walking" name="walking">
+  </div>
+
+  <div class="skill">
+      <label for="sleeping_alone">في أي عمر كان الطفل ينام بشكل منفصل؟</label>
+      <input type="text" id="sleeping_alone" name="sleeping_alone">
+  </div>
+
+  <div class="skill">
+      <label for="toilet">في أي عمر كان الطفل يستخدم الحمام؟</label>
+      <input type="text" id="toilet" name="toilet">
+  </div>
+
+  <div class="skill">
+      <label for="eating_teething">في أي عمر بدأ الطفل يأكل لوحده؟ وفي أي عمر سنن الطفل؟</label>
+      <input type="text" id="eating_teething" name="eating_teething">
+  </div>
+
+</div>
+
+</fieldset>
+
+
+<fieldset>
+<legend> تطور النطق</legend>
+<label for="first_word_time">متى كانت أول كلمة للطفل، وما هي؟</label>
+<input type="text" id="first_word_time" name="first_word_time">
+
+<label for="understanding_others">هل يفهم الطفل ما يقوله الآخرون له؟</label>
+<input type="text" id="understanding_others" name="understanding_others">
+
+<label for="sentence_production">هل ينتج الطفل جملًا؟</label>
+<input type="text" id="sentence_production" name="sentence_production">
+
+<label for="sentence_word_count">كم عدد الكلمات في جُمل الطفل؟</label>
+<input type="text" id="sentence_word_count" name="sentence_word_count">
+
+<label for="vocabulary_presence">هل يمتلك الطفل مخزونًا من الكلمات؟ (إذا نعم)</label>
+<input type="text" id="vocabulary_presence" name="vocabulary_presence">
+
+
+
+  <h3> تقييم الصوت</h3>
+  <label for="hyponasal">1. احتقان الأنف (نقصي):</label>
+  <input type="text" id="hyponasal" name="hyponasal">
+  <label for="hypernasal">2. احتقان الأنف (زيادة):</label>
+  <input type="text" id="hypernasal" name="hypernasal">
+  <label for="normal_voice">3. صوت طبيعي:</label>
+  <input type="text" id="normal_voice" name="normal_voice">
+  <label for="breathing">4. التنفس (طبيعي / غير طبيعي):</label>
+  <input type="text" id="breathing" name="breathing">
+
+ 
+
+
+    <h3> التأتأة</h3>
+    <label for="disfluency">هل يعاني الطفل من التأتأة؟</label>
+    <input type="text" id="disfluency" name="disfluency">
+    <label for="speech_speed">هل يتميز كلام الطفل بسرعة أو بطء مفرط؟</label>
+    <input type="text" id="speech_speed" name="speech_speed">
+    <label for="stuttering_start_age">في أي عمر بدأت هذه المشكلة؟</label>
+    <input type="text" id="stuttering_start_age" name="stuttering_start_age">
+    <label for="stuttering_situations">هل تظهر في مواقف أو مع أشخاص معينين؟</label>
+    <input type="text" id="stuttering_situations" name="stuttering_situations">
+
+</fieldset>
+
+<fieldset>
+  <legend>تقييم القدرات الإدراكية</legend>
+    <label for="concentration"> التركيز:</label>
+    <input type="text" id="concentration" name="concentration">
+    <label for="attention_span">مدى الانتباه:</label>
+    <input type="text" id="attention_span" name="attention_span">
+    <label for="plays_with_toys">هل يلعب بالألعاب بشكل صحيح:</label>
+    <input type="text" id="plays_with_toys" name="plays_with_toys">
+    <label for="good_memory"> هل لديه ذاكرة جيدة:</label>
+    <input type="text" id="good_memory" name="good_memory">
+    <label for="problem_solving"> هل يقوم بحل المشكلات:</label>
+    <input type="text" id="problem_solving" name="problem_solving">
+  </div>
+
+
+    <h4> التوحد</h4>
+    <label for="is_verbal">هل الطفل يتكلم؟</label>
+    <input type="text" id="is_verbal" name="is_verbal">
+
+    <label for="communication_method">كيف تتواصل مع طفلك؟</label>
+    <input type="text" id="communication_method" name="communication_method">
+
+    <label for="repetitive_behaviors">هل لدى الطفل سلوكيات متكررة؟</label>
+    <input type="text" id="repetitive_behaviors" name="repetitive_behaviors">
+
+    <label for="toe_walking">هل يقف الطفل على أطراف أصابعه؟</label>
+    <input type="text" id="toe_walking" name="toe_walking">
+
+    <label for="repetitive_sounds">هل يصدر الطفل أصواتًا متكررة؟</label>
+    <input type="text" id="repetitive_sounds" name="repetitive_sounds">
+ </fieldset>
+
+ <fieldset>
+  <legend> المجال الاجتماعي</legend>
+
+    <label for="interaction-family">هل يتفاعل الطفل مع أفراد العائلة؟</label>
+    <textarea id="interaction-family" name="interactionFamily"></textarea>
+    
+    <label for="spontaneous-speech">هل يشارك الطفل في الحديث من تلقاء نفسه؟</label>
+    <textarea id="spontaneous-speech" name="spontaneousSpeech"></textarea>
+    
+    <label for="understand-others">هل يفهم الطفل ما يقوله الآخرون؟</label>
+    <textarea id="understand-others" name="understandOthers"></textarea>
+    
+    <label for="adaptation-new-env">ما هو مقدار تكيف الطفل مع أي بيئة جديدة؟</label>
+    <textarea id="adaptation-new-env" name="adaptationNewEnv"></textarea>
+
+    <label for="help-without-request">هل تقدمان للطفل مساعدة دون أن يطلبهما منكما عند مواجهة مشكلة؟ و تحدي المصاعب ؟</label>
+    <textarea id="help-without-request" name="helpWithoutRequest"></textarea>
+
+    <label for="activity-level">هل مستوى نشاط الطفل مناسب لعمره؟</label>
+    <textarea id="activity-level" name="activityLevel"></textarea>
+    
+    <label for="hyperactivity">هل يعتبر الطفل كثير حركة؟</label>
+    <textarea id="hyperactivity" name="hyperactivity"></textarea>
+    
+    <label for="nonverbal-expression">ما هي طرق تعبير الطفل غير الكلامية ؟</label>
+    <textarea id="nonverbal-expression" name="nonverbalExpression"></textarea>
+
+    <label for="child-personality">وصف شخصية الطفل ببيئته ؟</label>
+    <textarea id="child-personality" name="childPersonality"></textarea>
+
+    <label for="child-feelings-problem">كيف يشعر الطفل اتجاه مشكلتهن؟</label>
+    <textarea id="child-feelings-problem" name="childFeelingsProblem"></textarea>
+    
+    <label for="interaction-others">كيفية تعامل الطفل مع المحيطين به (أسرته ،أصدقائه ،أقاربه)؟</label>
+    <textarea id="interaction-others" name="interactionOthers"></textarea>
+
+    <label for="teacher-response">كيفية تعامل المدرس –المدرسة مع مشكلة الطفل؟</label>
+    <textarea id="teacher-response" name="teacherResponse"></textarea>
+
+    <label for="is-calm">هل تجدين طفلك يتسم بالهدوء؟</label>
+    <textarea id="is-calm" name="isCalm"></textarea>
+    
+    <label for="focus-duration">هل يركز طفلك لفترة زمنيه طويلة ؟</label>
+    <textarea id="focus-duration" name="focusDuration"></textarea>
+    
+    <label for="is-social">هل يعتبر طفلك اجتماعي ؟</label>
+    <textarea id="is-social" name="isSocial"></textarea>
+
+    <label for="separates-easily">هل ينفصل عن والديه بسهوله ؟</label>
+    <textarea id="separates-easily" name="separatesEasily"></textarea>
+
+    <label for="is-independent">هل يعتبر الطفل مستقل و معتمدا على ذاته؟</label>
+    <textarea id="is-independent" name="isIndependent"></textarea>
+
+    <label for="self-confidence">هل طفلك واثق من نفسه؟</label>
+    <textarea id="self-confidence" name="selfConfidence"></textarea>
+
+    <h4>هل يعاني الطفل مما يأتي وما الفترة الزمنية التي بدأت فيها المشكلة بالظهور؟</h4>
+
+    <label for="finger-sucking">- مص الإصبع</label>
+    <input type="text" id="finger-sucking" name="fingerSucking">
+    
+    <label for="bedwetting">- التبول اللاإرادي</label>
+    <input type="text" id="bedwetting" name="bedwetting">
+    
+    <label for="attention-deficit">- ضعف التركيز والانتباه</label>
+    <input type="text" id="attention-deficit" name="attentionDeficit">
+    
+    <label for="sleep-disorders">- اضطرابات النوم</label>
+    <input type="text" id="sleep-disorders" name="sleepDisorders">
+    
+    <label for="eating-disorders">- اضطرابات الأكل</label>
+    <input type="text" id="eating-disorders" name="eatingDisorders">
+    
+    <label for="anxiety">- القلق</label>
+    <input type="text" id="anxiety" name="anxiety">
+    
+    <label for="stubbornness">- عناد</label>
+    <input type="text" id="stubbornness" name="stubbornness">
+    
+    <label for="aggressiveness">- عدوانية</label>
+    <input type="text" id="aggressiveness" name="aggressiveness">
+    
+    <label for="tension">- توتر</label>
+    <input type="text" id="tension" name="tension">
+    
+    <label for="mood-swings">- تقلب/صراخ</label>
+    <input type="text" id="mood-swings" name="moodSwings">
+
+    <label for="peer-activities">هل يتفاعل الطفل و ينخرط بالأنشطة مع الأقران؟</label>
+    <textarea id="peer-activities" name="peerActivities"></textarea>
+    
+    <label for="peer-relationships">هل يقيم الطفل علاقات مع الأقران؟</label>
+    <textarea id="peer-relationships" name="peerRelationships"></textarea>
+    
+    <label for="initiates-play">هل يبادر الطفل باللعب؟</label>
+    <textarea id="initiates-play" name="initiatesPlay"></textarea>
+    
+    <label for="competition-participation">هل يشارك المنافسات ويتقبل النجاح والفشل؟</label>
+    <textarea id="competition-participation" name="competitionParticipation"></textarea>
+
+    <label for="social-activities">هل يشارك طفلك في النشاطات الاجتماعية (ألعاب - حفلات)؟</label>
+    <textarea id="social-activities" name="socialActivities"></textarea>
+    
+    <label for="response-fear">كيف يستجيب الطفل لمؤثر مخيف؟</label>
+    <textarea id="response-fear" name="responseFear"></textarea>
+    
+    <label for="response-happy">كيف يستجيب الطفل لمؤثر مفرح؟</label>
+    <textarea id="response-happy" name="responseHappy"></textarea>
+    
+    <label for="response-sad">كيف يستجيب الطفل لمؤثر محزن؟</label>
+    <textarea id="response-sad" name="responseSad"></textarea>
+
+    <label for="likes">ما هي الأشياء التي يحبها الطفل؟</label>
+    <textarea id="likes" name="likes"></textarea>
+    
+    <label for="daily-routine">ما هو الروتين اليومي للطفل؟</label>
+    <textarea id="daily-routine" name="dailyRoutine"></textarea>
+    
+    <label for="free-time">ماذا يفعل الطفل في وقت فراغه؟</label>
+    <textarea id="free-time" name="freeTime"></textarea>
+
+    <label for="treatment-expectations">ما هي توقعاتك من العلاج؟</label>
+    <textarea id="treatment-expectations" name="treatmentExpectations"></textarea>
+
+ </fieldset>
+
+  <fieldset>
+    <legend>مهارات المساعدة الذاتية</legend>
+   
+    
+    <label for="point-up-down">اشر بيدك لاتجاه فوق-تحت</label>
+    <textarea id="point-up-down" name="pointUpDown"></textarea>
+
+    <label for="point-right-left">اشر بيدك لاتجاه يمين-يسار</label>
+    <textarea id="point-right-left" name="pointRightLeft"></textarea>
+    
+    <label for="where-go-lion">لو بدك تشوف اسد وين بتروح ؟</label>
+    <textarea id="where-go-lion" name="whereGoLion"></textarea>
+    
+    <label for="where-buy-chips">لو بدك تشتري شيبس وين بتروح ؟</label>
+    <textarea id="where-buy-chips" name="whereBuyChips"></textarea>
+
+    <label for="where-go-sick">لما تكون مريض وين بتروح ؟</label>
+    <textarea id="where-go-sick" name="whereGoWhenSick"></textarea>
+    
+    <label for="what-do-thirsty">لما تكون عطشان شو بتعمل ؟</label>
+    <textarea id="what-do-thirsty" name="whatDoWhenThirsty"></textarea>
+    
+    <label for="when-sleep">متى ننام ؟</label>
+    <textarea id="when-sleep" name="whenSleep"></textarea>
+
+    <label for="when-sunrise">متى تشرق الشمس ؟</label>
+    <textarea id="when-sunrise" name="whenSunrise"></textarea>
+
+    <label for="chicken-legs">كم رجل للدجاجة ؟</label>
+    <textarea id="chicken-legs" name="chickenLegs"></textarea>
+
+    <label for="bigger-tree-or-flower">من اكبر الشجرة او الوردة ؟</label>
+    <textarea id="bigger-tree-or-flower" name="biggerTreeOrFlower"></textarea>
+    
+    <label for="hot-season">في أي فصل يكون الجو حار ؟</label>
+    <textarea id="hot-season" name="hotSeason"></textarea>
+    
+    <label for="night-color">ما هو لون الليل ؟</label>
+    <textarea id="night-color" name="nightColor"></textarea>
+
+
+  </fieldset>
+
+  <fieldset>
+    <legend>مهارات  اخرى</legend>
+      <h4>أ: القدرات الحركية الكبرى</h4>
+      <label for="walking">المشي</label>
+      <input type="text" id="walking" name="walking_score">
+      
+      <label for="running">الجري</label>
+      <input type="text" id="running" name="running_score">
+      
+      <label for="jumping">القفز</label>
+      <input type="text" id="jumping" name="jumping_score">
+
+    
+
+      <h4>ب: القدرات الحركية الدقيقة</h4>
+      <label for="grasping">الإمساك</label>
+      <input type="text" id="grasping" name="grasping_score">
+      
+      <label for="eye_hand_coordination">التنسيق بين العين واليد</label>
+      <input type="text" id="eye_hand_coordination" name="eye_hand_coordination_score">
+      
+      <label for="scissor_use">استخدام المقص</label>
+      <input type="text" id="scissor_use" name="scissor_use_score">
+
+    
+      <h4>ج: القدرات الإدراكية</h4>
+      <label for="concentration">التركيز</label>
+      <input type="text" id="concentration" name="concentration_score">
+      
+      <label for="memory">الذاكرة</label>
+      <input type="text" id="memory" name="memory_score">
+      
+      <label for="planning">التخطيط والتنظيم</label>
+      <input type="text" id="planning" name="planning_score">
+
+  
+    
+      <h4>د: المهارات الإدراكية البصرية</h4>
+      <label for="visual_discrimination">التمييز البصري</label>
+      <input type="text" id="visual_discrimination" name="visual_discrimination_score">
+      
+      <label for="visual_memory">الذاكرة البصرية</label>
+      <input type="text" id="visual_memory" name="visual_memory_score">
+      
+      <label for="visual_tracking">التتبع البصري</label>
+      <input type="text" id="visual_tracking" name="visual_tracking_score">
+  
+    
+
+      <h4>هـ: أنشطة الحياة اليومية</h4>
+      <label for="hand_washing">غسل اليدين</label>
+      <input type="text" id="hand_washing" name="hand_washing_score">
+      
+      <label for="teeth_brushing">تنظيف الأسنان</label>
+      <input type="text" id="teeth_brushing" name="teeth_brushing_score">
+      
+      <label for="toilet_use">استخدام الحمام</label>
+      <input type="text" id="toilet_use" name="toilet_use_score">
+    
+    
+  </fieldset>
+ 
+  <label>الاخصائي المسؤول:</label>
+  <p id="specialistName">جار التحميل...</p>
+  <input type="hidden" name="specialistId" id="specialistId">
+
+  <button type="submit">إرسال التقييم</button>
+</form>
+
+<script src="../api/CreateEvaluationForm.js"></script>
+<script src="../assets/js/apimessages.js"></script>
+
+</body>
+</html>

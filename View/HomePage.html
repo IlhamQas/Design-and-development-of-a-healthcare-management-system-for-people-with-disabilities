@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky medical</title>
+    <link rel="stylesheet" href="assets/css/HomePageStyles.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap"
+      rel="stylesheet">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+      
+
+  </head>
+  <body>
+    <!-- Header  carousel-wrapper -->
+    <header class="header">
+      <div class="container">
+        <h1 class="logo"><img src="assets/images/med 1.png"
+            style="width:120px;  margin-top:-20px; filter: brightness(60%);filter: contrast(60%);"></h1>
+        <nav class="navbar">
+
+          <a href="HomePage.html" style="color: white;" href="#home">Home</a>
+          <ul>
+            <li class="dropdown">
+              <a style="color: white;">About Us</a>
+              <ul class="dropdown-menu">
+                <li><a href="Html/AboutUs.html#SkyMEDlogo">How we are</a></li>
+                <li><a href="Html/AboutUs.html#SpeechTherapy">Our Department</a></li>
+              </ul>
+            </li>
+
+          </ul>
+          <a style="color: white;" href="Html/OurTeam.html">Our Team</a>
+          <ul>
+
+          </ul>
+          <a style="color: white;" href="Html/SpecialDisabilities.html">Disorders</a>
+          <ul> 
+    
+            <li class="dropdown">
+              <a style="color: white;">Shop</a>
+              <ul class="dropdown-menu">
+                <li><a href="Html/shop.html">Shop now</a></li>
+               
+              </ul>
+            </li></ul>
+          <ul>
+            <li class="dropdown">
+              <a style="color: white;" href="#contact">Contact</a>
+              <ul class="dropdown-menu">
+                <li><a href="#phone">Email Us</a></li>
+                <li><a href="#phone">Call Us</a></li>
+                <li><a href="#phone">Our Location</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="siginSideBar">
+          <a id="SinginBtn" href="Html/SignInPage.html"><button
+              class="signInButton">Sign In</button></a>
+          <a style="display: none;" id="DashBtn"><button
+              style="background-color: gray;" class="signInButton"
+              onclick="redirectToDashboard()">Dashbord</button></a>
+          <img onclick="redirectToDashboard()" id="user-icon"
+            src="assets/images/default-user-icon.jpg"
+            alt="User Icon"
+            style="width: 45px; height: 45px; border-radius: 50%; margin-top:0px;">
+
+        </div>
+      </div>
+
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home"
+      style="background-image: url('assets/images/homebackground.jpg'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center -0.45px;">
+      <div class="hero-content">
+        <h1
+          style="font-size:60px; animation: slide-in 1s ease-out forwards;animation-delay: 0.1s;opacity: 0;">Sky
+          Medical</h1>
+        <h2
+          style="font-size:30px; animation: slide-in 1s ease-out forwards; animation-delay: 1s;opacity: 0;">Join
+          Us to Make a Difference</h2>
+        <p
+          style="font-size:20px;font-weight: 300;animation: slide-in 1s ease-out forwards; animation-delay:1s;opacity: 0;">for
+          Hearing, Speech and Language
+          Therapy, occupational therapy
+          and physiotherapy.<br><a href="Html/AudiologyDepartment.html"> Click for more Information about hearing services</a></p>
+
+        <a id="bookappointmentbtn" href="Html/BookAppointmentPage.html"> <button
+            style="animation: slide-in 1s ease-out forwards; animation-delay:1s;opacity: 0;">Book
+            Appointment Now</button></a>
+      </div>
+    </section>
+
+    <section id="animated-section" class="WhoWeAre">
+      <div class="contener2">
+        <div class="image-container"><img class="background-image"
+            src="assets/images/medicalcenter1.jpg">
+          <img class="overlay-image" src="assets/images/img.jpg">
+          <img class="overlay-image2" src="assets/images/doctor.jpg">
+        </div>
+
+        <div class="contener3">
+          <p style="color: rgb(228, 105, 57); font-size: 16px;">____Welcome to
+            Sky medical!</p>
+          <h2
+            style="color: rgb(37, 36, 36); padding-bottom:20px; font-size: 39px; font-family: 'Space Grotesk', sans-serif;">Who
+            We are!</h2>
+          <p style="padding-bottom: 20px;">Sky
+            Medical for Hearing, Speech and Language Therapy, occupational
+            therapy and physiotherapy. The center aims to improve the
+            lives of individuals with hearing or speech challenges through
+            advanced therapeutic techniques.
+            focusing on enhancing communication abilities for individuals of all
+            ages. </p>
+
+          <hr>
+          <p style="display: inline-block;">Keep in Touch! for more information
+          </p>
+          <a href="Html/AboutUs.html">Click here </a>
+          <br>
+
+          <a href="https://www.facebook.com/skymedicalps/?locale=ar_AR"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/explore/locations/120718729330953/#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/97022967096" target="_blank">
+            <i class="fa-solid fa-phone"></i>
+          </a>
+          <a href="mailto:haneensabra501@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
+        
+        </div>
+      </div>
+
+    </section>
+
+
+    <section class="medicalCenter">
+      <p class="departmen-titel"
+        style="color: rgb(163, 54, 15); font-size: 18px;">____Explore our
+        department!</p>
+      <h2 class="departmen-titel1"
+        style="color: rgb(209, 209, 209); padding-bottom:60px; font-size: 39px; font-family: 'Space Grotesk', sans-serif; width: 350px; display: block; margin:auto;">Departments
+        Overview!</h2>
+
+      <h5 class="departmen-titel2"
+        style=" max-width:600px; display:block; margin:auto;font-family: 'Space Grotesk', sans-serif; color: rgb(190, 186, 186)">
+        At Sky Medical we believe
+        that everything deserves the best care, and we tailored to your
+        individual requirements.<br><a href="Html/SpecialDisabilities.html"> Check out the disorders.</a></h5>
+
+    </section>
+
+    <section class="department">
+      <div class="department-card" style="width: 18rem;">
+        <img
+          src="assets/images/Special Education and Behavioral Modification.jpg"
+          class="card-img-top"
+          alt="Card image" style="filter: brightness(70%);">
+        <div class="card-body">
+          <h5 class="card-title">Special Education and Behavioral Modification
+          </h5>
+          <p style="color: gray;" class="card-text">improve communication, and
+            social skills for individuals, guided by certified specialists to
+            enhance independence.</p>
+          <a href="Html/AboutUs.html" class="ReadMore">Read more</a>
+        </div>
+      </div>
+
+      <div class="department-card" style="width: 18rem;">
+        <img src="assets/images/Hearing test.webp" class="card-img-top"
+          alt="Card image" style="filter: brightness(70%);">
+        <div class="card-body">
+          <h5 class="card-title">Audiology Therapy Department</h5>
+          <p style="color: gray;" class="card-text">Helping individuals reach
+            their educational goals.succeed in learning and develop key academic
+            and social skills.</p>
+          <a href="Html/AboutUs.html" class="ReadMore">Read more</a>
+        </div>
+      </div>
+
+      <div class="department-card" style="width: 18rem;">
+        <img src="assets/images/activity6.jpg" class="card-img-top"
+          alt="Card image" style="filter: brightness(70%);">
+        <div class="card-body">
+          <h5 class="card-title">Speech and Language Therapy Department</h5>
+          <p style="color: gray;" class="card-text">Helping individuals reach
+            their educational goals.succeed in learning and develop key academic
+            and social skills.</p>
+          <a href="Html/AboutUs.html" class="ReadMore">Read more</a>
+        </div>
+      </div>
+
+      <div class="department-card" style="width: 18rem;">
+        <img src="assets/images/Occupational Therapy Department.jpeg"
+          class="card-img-top"
+          alt="Card image" style="filter: brightness(80%); height: 190px;;">
+        <div class="card-body">
+          <h5 class="card-title">Occupational Therapy Department</h5>
+          <p style="color: gray; " class="card-text"> This service helps manage
+            anxiety, depression, and other mental health challenges related to
+            disabilities</p>
+          <a href="#" class="ReadMore">Read more</a>
+        </div>
+      </div>
+
+      <div class="department-card" style="width: 18rem;">
+        <img src="assets/images/Physical Therapy Department.png"
+          class="card-img-top" alt="Card image" style="filter: brightness(80%);">
+        <div class="card-body">
+          <h5 class="card-title">Physical Therapy Department</h5>
+          <p style="color: gray;" class="card-text">provides specialized
+            therapeutic consultations in hearing and speech problems, to help
+            patients develop communication skills</p>
+          <a href="Html/AboutUs.html" class="ReadMore">Read more</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee-container">
+      <div class="marquee-text">&nbsp;<i class="fa-solid fa-location-dot"></i>&nbsp;
+        Ramallah, Al-bardouni BUilding near the clock Tower - Fourth
+        Floor&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa-solid fa-phone"></i>&nbsp;059-296 70 96 &nbsp;&nbsp;&nbsp;
+        <i class="fa-solid fa-bell"></i>&nbsp;Appointments Now Available Call Us
+        Today!&nbsp;&nbsp;&nbsp; <i class="fa-solid fa-certificate"></i>
+        &nbsp;for more information follow us <a href>here</a></div>
+    </div>
+
+    <section class="section">
+      <p style="color: rgb(230, 76, 20);">____Services Overview!</p>
+      <h1 style="color: black;">Building the world with quality services!</h1>
+      <p style="color: rgb(0, 0, 0);">Our Services</p>
+    </section>
+    <div class="services">
+      <div class="service-box">
+        <div class="service-icon"><img style="width:60px;"
+            src="assets/images/Therapeutic consultations Icon1.png"></div>
+        <div class="service-title">Therapeutic consultations</div>
+        <p style="color: gray;">The center provides specialized therapeutic
+          consultations in hearing and speech problems, to help patients develop
+          communication skills and social integration</p>
+      </div>
+      <div class="service-box">
+        <div class="service-icon"><img style="width:50px;"
+            src="assets/images/Hearint test Icon.png"></div>
+        <div class="service-title">Hearint test</div>
+        <p style="color: gray;">Accurate and comprehensive examination services
+          for hearing problems, in addition to customized treatment to help
+          improve the quality of daily life</p>
+      </div>
+      <div class="service-box">
+        <div class="service-icon"><img style="width:60px;"
+            src="assets/images/Comprehensive support icon.png"></div>
+        <div class="service-title">Comprehensive support</div>
+        <p style="color: gray;">Integrated support in physical therapy and
+          occupational therapy to improve patients' movement and ability to
+          perform daily activities independently.</p>
+      </div>
+      <div class="service-box">
+        <div class="service-icon"><img style="width:70px;"
+            src="assets/images/Therapeutic consultations Icon.png"></div>
+        <div class="service-title">Specialized treatment</div>
+        <p style="color: gray;">ATreatment services tailored to each individual's
+          needs, to ensure they receive the best healthcare according to their
+          personal circumstances.</p>
+      </div>
+      <div class="service-box">
+        <div class="service-icon"><img style="width:70px;"
+            src="assets/images/Continuous follow-up icon.png"></div>
+        <div class="service-title">Continuous follow-up</div>
+        <p style="color: gray;">Providing continuous follow-up sessions to
+          ensure the improvement of health status with the necessary adjustments
+          to the treatment plan.</p>
+      </div>
+      <div class="service-box">
+        <div class="service-icon"><img style="width:70px;"
+            src="assets/images/Flexible treatment plans icon.png"></div>
+        <div class="service-title">Flexible treatment plans</div>
+        <p style="color: gray;">Providing flexible treatment plans that can be
+          modified based on the progress of the case and the changing needs of
+          patients.</p>
+      </div>
+    </div>
+
+    <!-- Announcements Section -->
+    <section class="announcements">
+      <div class="container mt-5">
+        <p style="color: rgb(233, 99, 22);font-size: 20px;">____Discover our
+          Activity</p>
+        <h1
+          style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; max-width: 500px;display: block; margin:auto;">Work
+          together to create
+          unique experience!</h1>
+        <p
+          style="font-size:18px; color: rgba(107, 107, 109, 0.952); margin-top: 30px; margin-bottom: 20px;">Through
+          a comfortable and supportive therapeutic environment, The Center
+          ensures the best results.</p>
+
+        <!-- Carousel -->
+        <div id="carouselExample" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="assets/images/activity4.jpg" class="d-block w-100" alt="Interactive Sessions" style="filter: brightness(60%);">
+              <p class="ActivityDesc">
+                <strong style="font-size: 40px;">Interactive Sessions</strong><br>
+                Modern therapeutic sessions using educational games<br>
+                and auditory exercises to enhance engagement.
+              </p>
+            </div>
+        
+            <div class="carousel-item">
+              <img src="assets/images/activity.jpg" class="d-block w-100" alt="Group Activities" style="filter: brightness(60%);">
+              <p class="ActivityDesc">
+                <strong style="font-size: 40px;">Group Activities</strong><br>
+                Social group therapy aimed at building communication<br>
+                and cooperation skills among participants.
+              </p>
+            </div>
+        
+            <div class="carousel-item">
+              <img src="assets/images/activity6.jpg" class="d-block w-100" alt="Creative Therapy" style="filter: brightness(60%);">
+              <p class="ActivityDesc">
+                <strong style="font-size: 40px;">Creative Therapy</strong><br>
+                Engaging in artistic and musical activities to support<br>
+                emotional expression and development.
+              </p>
+            </div>
+        
+            <div class="carousel-item">
+              <img src="assets/images/activity5.jpg" class="d-block w-100" alt="Motor Skills Activities" style="filter: brightness(60%);">
+              <p class="ActivityDesc">
+                <strong style="font-size: 40px;">Motor Skills Activities</strong><br>
+                Physical therapy games designed to improve balance,<br>
+                coordination, and motor development.
+              </p>
+            </div>
+        
+            <div class="carousel-item">
+              <img src="assets/images/Hearing test.webp" class="d-block w-100" alt="Hearing Test Sessions" style="filter: brightness(60%);">
+              <p class="ActivityDesc">
+                <strong style="font-size: 40px;">Hearing Test Sessions</strong><br>
+                Accurate diagnostic tests with modern equipment<br>
+                to evaluate and improve auditory performance.
+              </p>
+            </div>        
+          </div>
+          <!-- Controls -->
+          <a class="carousel-control-prev" href="#carouselExample" role="button"
+            data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExample" role="button"
+            data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+          <div class="carousel-indicators">
+            <button type="button" data-target="#carouselExample"
+              data-slide-to="0" class="active"></button>
+            <button type="button" data-target="#carouselExample"
+              data-slide-to="1"></button>
+            <button type="button" data-target="#carouselExample"
+              data-slide-to="2"></button>
+            <button type="button" data-target="#carouselExample"
+              data-slide-to="3"></button>
+            <button type="button" data-target="#carouselExample"
+              data-slide-to="4"></button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section>
+      <div class="ShopContainer">
+
+        <div><img class="shop-img" src="assets/images/MEDICALshop.avif"></div>
+        <div class="ShopNowsection">
+          <p style="color: rgb(221, 77, 25);font-size: 18px;">____Visit our
+            shop!</p>
+          <h2>SHOP SPACE!</h2>
+          <p class="shop_titel">GET YOUR THERAPEUICE PRODUCT, VISIT OUR STOR
+            <span style="color: rgb(151, 9, 9);">NOW</span><br>
+            Access specialized tools and resources tailored to meet your needs
+            today!</p>
+          <hr>
+          <button onclick="redirectToshop()" class="ShopNowBtn">Shop Now</button>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+
+      <div id="information" style="max-width: 500px;">
+        <p style="font-size: 20px;">information</p>
+        <li>Operating Hours: Sunday to Thursday, 9 AM to 5 PM</li>
+        <br>
+        <li>Services: Hearing, Speech and Language, therapeutic programs for
+          children with disabilities</li>
+        <br>
+        <li>Committed to enhancing the lives of individuals with special needs
+          through innovative care and therapy.</li>
+        <br>
+        <li>©2024 Sky Center for Hearing, Speech and Language Therapy,
+          occupational therapy
+          and physiotherapy. All rights reserved.</li>
+
+      </div>
+
+      <div id="phone" style="max-width: 500px;">
+        <p style="font-size: 20px;">contact</p>
+        <a  href="https://www.facebook.com/skymedicalps/?locale=ar_AR" class="feacbookIcon">sky medical for hearing and speech therapy</a>
+        <a href="https://wa.me/97022967096" target="_blank" class="whatsappIcon">+972 02-296 70 96</a>
+        <a class="faxIcon">+97 056 270 00 12</a>
+        <a href="https://www.instagram.com/explore/locations/120718729330953/#" class="InstagramIcon">@skymed2019</a>
+      </div>
+
+      <div id="location" style="max-width: 500px;">
+        <p style="font-size: 20px;">location</p>
+        <a class="locationicon" href="https://www.google.com/maps/dir/31.9073508,35.205882/31.902554,35.2023495/@31.903345,35.2033329,17.75z/data=!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">Ramallah, Al-bardouni BUilding
+          near the clock Tower - Fourth Floor </a>
+        <p>Sky Center - Located in Ramallah, Palestine</p>
+      </div>
+
+    </footer>
+    <script src="assets/js/homepage.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="api/HomePage.js"></script>
+
+  </body>
+</html>

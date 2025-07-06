@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctor Schedule Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      background: linear-gradient(to bottom right, #f6f9fc, #eef3f8);
+      color: #2d3748;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2b6cb0;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .section {
+      background: #ffffff;
+      padding: 35px;
+      border-radius: 18px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .section:hover {
+      box-shadow: 0 12px 32px rgba(43, 108, 176, 0.12);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d3748;
+      margin-bottom: 25px;
+      font-size: 1.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 20px;
+      display: block;
+      color: #4a5568;
+      font-size: 0.95rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #cbd5e0;
+      background-color: #f9fafb;
+      margin-top: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus {
+      border-color: #3182ce;
+      outline: none;
+    }
+
+    #scheduleDetails {
+      margin-top: 30px;
+    }
+
+    .slot-card {
+      background: #f0f6ff;
+      border-left: 6px solid #3182ce;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .slot-card:hover {
+      transform: scale(1.02);
+    }
+
+    .slot-day {
+      font-weight: 700;
+      color: #2b6cb0;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .slot-times {
+      color: #2d3748;
+    }
+
+    .time-badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 6px 14px;
+      margin: 5px 6px 0 0;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .no-slots {
+      text-align: center;
+      color: #e53e3e;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    h3 {
+      color: #1a202c;
+      font-size: 1.2rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #4a5568;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 25px;
+      }
+
+      .slot-day {
+        font-size: 1rem;
+      }
+
+      .time-badge {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🗓 Doctor Schedule Management</h1>
+
+  <div class="section">
+    <h2 style="text-align: center;">View Available Appointments</h2>
+
+    <label for="departmentSelect">Select Department:</label>
+    <select id="departmentSelect" onchange="fetchDoctors()"></select>
+
+    <label for="doctorSelect">Select Doctor:</label>
+    <select id="doctorSelect" onchange="fetchDoctorSchedule()"></select>
+
+    <div id="scheduleDetails"></div>
+  </div>
+
+  <script>
+    const baseURL = "http://localhost:4000/api/v1";
+    const token = localStorage.getItem('token');
+
+    async function fetchDepartments() {
+      const res = await fetch(`${baseURL}/dep/allDep`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      const departmentSelect = document.getElementById("departmentSelect");
+      departmentSelect.innerHTML = '<option value="">-- Choose department --</option>';
+      data.departments.forEach(dep => {
+        const option = document.createElement("option");
+        option.value = dep._id;
+        option.textContent = dep.name;
+        departmentSelect.appendChild(option);
+      });
+    }
+
+    async function fetchDoctors() {
+      const departmentId = document.getElementById("departmentSelect").value;
+      const doctorSelect = document.getElementById("doctorSelect");
+      doctorSelect.innerHTML = '<option value="">-- Choose doctor --</option>';
+      if (!departmentId) return;
+
+      const res = await fetch(`${baseURL}/dep/all/${departmentId}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      data.department.doctors.forEach(doc => {
+        const option = document.createElement("option");
+        option.value = doc.doctorId;
+        option.textContent = doc.doctorName;
+        doctorSelect.appendChild(option);
+      });
+    }
+
+    async function fetchDoctorSchedule() {
+      const doctorId = document.getElementById("doctorSelect").value;
+      const res = await fetch(`${baseURL}/Doctor/allbyId/${doctorId}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      const container = document.getElementById("scheduleDetails");
+      container.innerHTML = '';
+
+      if (!data.find.availableSlots || data.find.availableSlots.length === 0) {
+        container.innerHTML = `<p class="no-slots">No available appointments.</p>`;
+        return;
+      }
+
+      let details = `<h3>Doctor Notes:</h3><p>${data.details || 'No additional details provided.'}</p>`;
+      container.innerHTML += details;
+
+      container.innerHTML += `<h3>Available Slots:</h3>`;
+
+      data.find.availableSlots.forEach(slot => {
+  const timesHTML = slot.times.map(time => `<span class="time-badge">${time}</span>`).join(" ");
+  const card = `
+    <div class="slot-card">
+      <div class="slot-day">${slot.dayOfWeek}</div>
+      <div class="slot-times">${timesHTML}</div>
+    </div>
+  `;
+  container.innerHTML += card;
+      });
+    }
+
+
+    fetchDepartments();
+
+
+
+
+
+  window.onload = async function () {
+    try {
+      const response = await fetch(`${baseURL}/Doctor/fixed`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${token}` 
+        }
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        console.log('✅ Restored missing slots:', result);
+      } else {
+        console.error('❌ Failed to restore slots:', result.message);
+      }
+    } catch (error) {
+      console.error('🚨 Error restoring slots:', error.message);
+    }
+  };
+
+
+  </script>
+
+</body>
+</html>
