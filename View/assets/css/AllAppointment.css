@@ -1,0 +1,185 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
+
+  .appointments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 950px;
+    margin: auto;
+  }
+
+  .appointment-card {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #4a6fa5;
+    transition: transform 0.2s;
+  }
+
+  .appointment-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .appointment-card p {
+    margin: 10px 0;
+    font-size: 15.5px;
+    color: #34495e;
+  }
+
+  .appointment-card p strong {
+    color: #4a6fa5;
+  }
+
+  .status-approved {
+    color: #28a745;
+    font-weight: bold;
+  }
+
+  .status-cancelled {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+
+  .status-pending {
+    color: #f39c12;
+    font-weight: bold;
+  }
+
+  hr {
+    margin-top: 25px;
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .actions button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s;
+  }
+
+  .edit-btn {
+    background-color: #3498db;
+    color: white;
+  }
+
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .edit-btn:hover {
+    background-color: #2980b9;
+  }
+
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+
+  /* Modal Styles */
+  #editModal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  #editModal > div {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  }
+
+  #editModal h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+
+  #newDateInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  #editModal button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  #editModal button:first-of-type {
+    background-color: #28a745;
+    color: white;
+  }
+
+  #editModal button:last-of-type {
+    background-color: #bdc3c7;
+    color: black;
+    margin-left: 10px;
+  }
+
+  #editModal button:first-of-type:hover {
+    background-color: #218838;
+  }
+
+  #editModal button:last-of-type:hover {
+    background-color: #a7aeb3;
+  }
+
+  @media (max-width: 600px) {
+    .appointment-card {
+      padding: 15px;
+    }
+
+    .actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .actions button {
+      width: 100%;
+    }
+
+    #editModal > div {
+      width: 90%;
+    }
+  }

@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+     background: url(../images/appointmentBackground1.jpg);
+     background-repeat: no-repeat;
+     background-position: cover;
+}
+.container {
+    background: rgba(255, 255, 255, 0.171);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+label {
+    display: block;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.281);
+    color: white;
+    font-size: 16px;
+}
+input::placeholder {
+    color: rgba(63, 51, 51, 0.356);
+}
+input:focus {
+    background: rgba(255, 255, 255, 0.425);
+}
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #276677;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #0072ff;
+    transform: translateY(-3px);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.footer{
+position: absolute;
+margin-top: 30px;
+}
+.back{
+ position: absolute;
+ top:50px;
+ left: 90px;
+ font-size: 20px;
+ color: azure;
+}

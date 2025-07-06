@@ -1,0 +1,243 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    text-align: right;
+    margin: 30px;
+    background-color: #f0f4f8;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 25px;
+    border-radius: 15px;
+    background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dcdfe6;
+}
+
+h2 {
+    font-size: 30px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 26px;
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+label {
+    font-size: 18px;
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+}
+
+input, select, textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    color: #333;
+    font-family: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #f1f8ff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input::placeholder, textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+button {
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 45%;
+    font-size: 18px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+button#submit-btn {
+    background-color: #28a745;
+}
+
+button#submit-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05); 
+}
+
+button#submit-btn:active {
+    background-color: #1e7e34;
+}
+
+button#print-btn {
+    background-color: #007bff;
+}
+
+button#print-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); 
+}
+
+button#print-btn:active {
+    background-color: #004085;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+textarea {
+    height: 140px;
+    resize: vertical;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+    margin: 20px 0;
+    text-align: justify;
+}
+
+p label {
+    font-size: 15px;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+p input {
+    width: 220px;
+    margin: 0 5px;
+    display: inline-block;
+    font-size: 16px;
+}
+/* مودال عرض التقارير */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 80px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.modal-content h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.modal-content .report {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.modal-content .report:last-child {
+    border-bottom: none;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+}
+.print-btn,.delete-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.delete-btn{
+    background-color: red;
+}
+.print-btn:hover {
+    background-color: #0056b3;
+}
+
+@media only screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    input, select, textarea {
+        padding: 12px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 14px;
+    }
+    
+    h2 {
+        font-size: 26px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 15px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}

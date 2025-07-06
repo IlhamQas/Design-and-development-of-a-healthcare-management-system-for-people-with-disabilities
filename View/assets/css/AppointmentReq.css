@@ -1,0 +1,125 @@
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #f8fbfd;
+    --accent-color: #f9fafc;
+    --danger-color: #e74c3c;
+    --success-color: #27ae60;
+    --text-color: #333;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+  }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--secondary-color);
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 100px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px var(--shadow-light);
+  }
+
+  .header {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+
+  .requests {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .request-card {
+    background-color: var(--accent-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px var(--shadow-light);
+  }
+
+  .request-details p {
+    margin: 8px 0;
+    color: var(--text-color);
+    font-size: 16px;
+  }
+
+  .request-details strong {
+    color: var(--primary-color);
+  }
+
+  .request-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 15px;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+
+  .approve-btn {
+    background-color: var(--success-color);
+    color: white;
+  }
+
+  .reject-btn {
+    background-color: var(--danger-color);
+    color: white;
+  }
+
+  .approve-btn:hover {
+    background-color: #219150;
+  }
+
+  .reject-btn:hover {
+    background-color: #c0392b;
+  }
+
+  .link-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    transition: 0.3s ease;
+  }
+
+  .link-button:hover {
+    background-color: #3e5e89;
+  }
+
+  .no-requests {
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+    margin-top: 40px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      margin: 60px 20px;
+      padding: 20px;
+    }
+    .request-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+}

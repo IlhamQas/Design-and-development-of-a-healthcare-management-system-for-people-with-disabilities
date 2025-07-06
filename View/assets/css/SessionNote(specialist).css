@@ -1,0 +1,153 @@
+body {
+    background-color: #f9fafb;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    margin: 0 300px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 30px;
+  }
+
+  .note-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+  }
+
+  .note-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .note-card h3 {
+    margin-top: 0;
+    color: #0a9396;
+    font-size: 18px;
+  }
+
+  .note-card p {
+    margin: 6px 0;
+    color: #334155;
+  }
+
+  .actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+  }
+
+  .btn-plan {
+    background-color: #00b4d8;
+    color: white;
+  }
+
+  .btn-plan:hover {
+    background-color: #0096c7;
+  }
+
+  .btn-chart {
+    background-color: #52b788;
+    color: white;
+  }
+
+  .btn-chart:hover {
+    background-color: #40916c;
+  }
+
+  #editModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    max-width: 480px;
+    width: 90%;
+    position: relative;
+  }
+
+  .modal-content h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .modal-content label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .modal-content textarea,
+  .modal-content input[type="number"],
+  .modal-content input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  .modal-actions {
+    text-align: right;
+    margin-top: 15px;
+  }
+
+  .modal-actions button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .modal-actions button:first-child {
+    background-color: #e2e8f0;
+    color: #111;
+  }
+
+  .modal-actions button:last-child {
+    background-color: #2563eb;
+    color: white;
+  }
+
+  img, video {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 500px) {
+    .modal-content {
+      padding: 20px;
+    }
+
+    .note-card {
+      padding: 16px;
+    }
+  }

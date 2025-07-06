@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 20px auto;
+    background: #f5f7fa;
+    color: #333;
+    padding: 10px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2c3e50;
+  }
+  select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    padding: 20px 25px;
+  }
+  .guardian-name {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #34495e;
+    margin-bottom: 15px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  th, td {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 1rem;
+  }
+  th {
+    background-color: #3498db;
+    color: white;
+  }
+  .no-data {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #999;
+    margin-top: 40px;
+  }

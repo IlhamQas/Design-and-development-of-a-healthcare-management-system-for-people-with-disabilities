@@ -1,0 +1,40 @@
+body {
+    font-family: 'Almarai', sans-serif;
+    background-color: #f3f3f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+#success-container {
+    display: none;
+    background-color: #28a745;
+    color: white;
+    padding: 20px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 1.5em;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#success-message {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#thank-you-note {
+    margin-top: 30px;
+    font-size: 1.2em;
+    text-align: center;
+    color: #333;
+}

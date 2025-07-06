@@ -1,0 +1,241 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url(../images/signINbackground1.jpg); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+
+.header {
+    padding: 1rem 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    transition: all 0.4s ease-in-out;
+}
+
+.header.scrolled {
+    position: fixed;
+    background-color: #343a408c;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0px;
+    height: 90px;
+}
+
+header.scrolled.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.headercontainer {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    max-width: 1000px;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.logo img {
+    margin-top: -50px;
+    width: 120px;
+    filter: brightness(60%) contrast(60%);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+.navbar ul li {
+    position: relative;
+}
+
+.navbar a {
+    text-decoration: none;
+    font-size: 17px;
+    color: white;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+    transform: translateY(-2px);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #08303d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 7px;
+    min-width: 200px;
+    
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-menu li a {
+    display: block;
+    color: rgb(94, 94, 94);
+    padding: 10px 15px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.siginSideBar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-top: -14px;
+    filter: brightness(70%);
+}
+
+.container2 {
+    background: rgba(255, 255, 255, 0.253);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
+    text-align: center;
+    width: 400px;
+    animation: fadeIn 1.2s ease-in-out;
+   
+}
+h2 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+    
+    
+}
+
+label {
+    color: rgb(255, 255, 255);
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.37);
+    color: rgba(255, 255, 255, 0.911);
+    font-size: 14px;
+    transition: 0.3s;
+    margin: 10px 0;
+    
+    
+}
+input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+.btn1 {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #276677;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #307ad4;
+}
+.register-link {
+    margin-top: 15px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+}
+.register-link a {
+    color: #00c6ff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.register-link a:hover {
+    text-decoration: underline;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+button:hover {
+    background: #0056b3;
+}
+.message {
+    margin-top: 15px;
+    color: green;
+   
+}
+.error {
+    color: rgb(255, 0, 0);
+    display: none;
+}

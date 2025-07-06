@@ -1,0 +1,106 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f7f9fb;
+    margin: 0;
+    padding: 40px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+  }
+
+  h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+  }
+
+  .filter {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+  }
+
+  select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+
+  th, td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background-color: #f4f6f9;
+    color: #2c3e50;
+  }
+
+  tr:hover {
+    background-color: #f1f9ff;
+  }
+
+  .stars {
+    color: #f1c40f;
+    font-size: 15px;
+  }
+
+  .media-btn {
+    color: #3498db;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .no-notes {
+    text-align: center;
+    color: #888;
+    margin-top: 30px;
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: auto;
+  }
+
+  .modal-content img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  .close {
+    float: right;
+    font-size: 18px;
+    cursor: pointer;
+  }

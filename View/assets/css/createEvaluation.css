@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  
+  input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1.8px solid #d1d9e6;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+    color: #2c3e50;
+    resize: vertical;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #2980b9;
+    box-shadow: 0 0 6px rgba(41, 128, 185, 0.3);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.95em;
+  }
+
+  th, td {
+    border: 1px solid #e1e8f0;
+    padding: 10px 8px;
+    text-align: center;
+    color: #34495e;
+  }
+
+  th {
+    background-color: #ecf0f7;
+    font-weight: 600;
+  }
+
+  button {
+    margin-top: 25px;
+    padding: 12px 20px;
+    font-size: 1.05em;
+    font-weight: 600;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+  }
+
+  button:hover {
+    background-color: #1c5980;
+  }
+
+  .btn-small {
+    padding: 6px 14px;
+    font-size: 0.9em;
+    border-radius: 6px;
+    background-color: #3498db;
+    box-shadow: none;
+  }
+
+  .btn-small:hover {
+    background-color: #217dbb;
+  }
+  fieldset {
+border: 2px solid #4A90E2;
+border-radius: 8px;
+padding: 15px 20px;
+margin-top: 20px;
+background-color: #f9faff;
+}
+
+legend {
+font-weight: bold;
+font-size: 1.2em;
+color: #2c3e50;
+padding: 0 10px;
+width: auto;
+}
+
+  .logo {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3fa6eb;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 3px rgba(41, 128, 185, 0.5);
+  letter-spacing: 1.2px;
+}
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.logo-img {
+  max-width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
+}

@@ -1,0 +1,227 @@
+      
+          body{
+            background-color: #f3f3f3;
+        }
+          .schedule-container {
+            width: 100%; 
+            overflow: hidden;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            
+          }
+      
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+          }
+      
+          th, td {
+            padding: 20px;
+            border: 1px solid #d6d6d6;
+            font-size: 15px;
+          }
+      
+          th {
+            background-color: #183663af;
+            color: white;
+            font-weight: bold;
+            
+          }
+      
+          td {
+            height: 60px;
+            width: 90px;
+            position: relative;
+          }
+      
+          .appointment {
+            background-color: #b30d23;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 6px;
+            transition: 0.3s;
+            cursor: pointer;
+            width: 100px;
+          }
+      
+          .appointment:hover {
+            background-color: #27ae60;
+          }
+      
+          @media (max-width: 768px) {
+            th, td {
+              font-size: 10px;
+              padding: 5px;
+            }
+          }
+      
+          .container1 {
+             padding-left: 40px;
+             padding-top: 50px;
+          }
+
+
+
+
+          
+ @media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+    transform: translateX(-250px);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+
+  .home-btn {
+  display: none;
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 101;
+}
+
+.home-btn:hover {
+  background-color: #2980b9;
+}
+
+
+@media (max-width: 768px) {
+  .home-btn {
+    display: block; 
+  }
+}
+@media (min-width: 768px) {
+  .home-btn {
+    display: none;
+  }
+          }
+
+
+   /* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  margin: 100px auto;
+  position: relative;
+}
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+button {
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #ffb9b9;
+}
+
+/* Available Appointments Cards */
+.card-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.card {
+  background-color: #e7f3ff;
+  border: 1px solid #aac;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.card:hover {
+  background-color: #d0e0ff;
+}
+#closeModalBtn{
+    position: absolute;
+    top:0;
+    right: 0;
+    cursor: pointer;
+}
+
+
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+    }
+
+    .alert {
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    h3 {
+      color: #0056b3;
+      margin-top: 30px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+  
+    .table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .table tr:hover {
+      background-color: #ddd;
+    }

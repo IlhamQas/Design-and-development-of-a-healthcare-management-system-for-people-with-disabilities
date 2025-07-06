@@ -1,0 +1,102 @@
+body {
+    font-family: cursive;
+    background-color: #e7e7e7;
+    padding: 40px;
+  }
+
+  .container {
+    max-width: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    margin: auto;
+    margin-top: 100px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #444;
+  }
+
+  input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+
+  .response {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    display: none;
+  }
+
+  .success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  a{
+    margin-left: 380px;
+    
+  }
+
+  select#roles {
+   width: 100%;
+   padding: 10px;
+   border: 1px solid #ccc;
+   border-radius: 10px;
+   background-color: #f9f9f9;
+   font-size: 16px;
+   color: #333;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+   transition: border-color 0.3s, box-shadow 0.3s;
+   outline: none;
+
+  }
+
+  select#roles:focus {
+   border-color: #5ca9fb;
+   box-shadow: 0 0 8px rgba(92, 169, 251, 0.4);
+   background-color: #fff;
+
+  }
+
+  select#roles option {
+  padding: 8px;
+  border-radius: 5px;
+  
+  }

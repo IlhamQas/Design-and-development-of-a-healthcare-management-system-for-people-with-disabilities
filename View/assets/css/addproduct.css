@@ -1,0 +1,242 @@
+body {
+    font-family: cursive;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.back-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.add-container , .product-container{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.back-button, .product-button,.add-product-button {
+    font-family: cursive;
+    font-size: 1.2rem;
+    color: #007bff;
+    background-color: transparent; 
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    text-decoration: none; 
+}
+
+.back-button i, .product-container-button,.add-product-button i {
+    font-size: 2rem;
+    margin-right: 8px;
+}
+
+.back-button:hover,.product-container ,.add-product-button:hover {
+    color: #026bdb;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    font-family:cursive;
+   
+    border-radius: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+#product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+}
+
+
+.product-item {
+   
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+
+.product-item img {
+    display: block;
+    width: 100%;
+    height: auto; 
+    object-fit: cover; 
+    margin: 0 auto; 
+    border-bottom: 2px solid #f1f1f1;
+    border-radius: 12px 12px 0 0;
+}
+
+
+.product-item:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: #ecf0f1;
+}
+
+.product-info {
+    padding: 20px;
+    color: #555;
+}
+
+.product-info .product-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
+.product-info .product-category {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+    text-transform: capitalize;
+}
+.product-category {
+    display: block; 
+}
+
+.product-info .product-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-top: 15px;
+    line-height: 1.6;
+    height: 80px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+
+.product-item:hover .product-description {
+    height: auto;
+}
+
+.product-item .buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+
+.back-container, .add-container {
+    position: fixed;
+    top: 20px;
+    z-index: 100;
+}
+
+.back-container {
+    left: 20px;
+}
+
+.add-container , .product-container{
+    right: 20px;
+    font-family: cursive;
+}
+
+.back-button, .add-product-button , .product-button {
+    font-family: cursive;
+    font-size: 1.2rem;
+    color: #007bff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.2s;
+    text-decoration: none;
+}
+
+.back-button i,.product-button i ,.add-product-button i {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.back-button:hover, .product-button:hover, .add-product-button:hover {
+    color: #026bdb;
+    transform: translateY(-3px);
+}
+
+
+form {
+    font-family:cursive;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #34495e;
+}
+
+input, select, textarea {
+    padding: 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    outline: none;
+    background-color: #f9f9f9;
+}
+
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
