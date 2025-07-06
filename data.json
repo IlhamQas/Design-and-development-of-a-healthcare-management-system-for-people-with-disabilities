@@ -1,0 +1,58 @@
+[
+    {
+      "_id": {"$oid": "651d3a41b4a37b5a18d4e001"},
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "$2b$10$exampleHashedPassword1",
+      "balance": 1000,
+      "role": "admin",
+      "image": "admin-profile.jpg",
+      "status": "active",
+      "confirmEmail": true,
+      "sendCode": null,
+      "createdAt": {"$date": "2023-01-15T00:00:00Z"},
+      "updatedAt": {"$date": "2023-01-15T00:00:00Z"}
+    },
+    {
+      "_id": {"$oid": "651d3a41b4a37b5a18d4e002"},
+      "name": "Medical Specialist",
+      "email": "specialist@clinic.com",
+      "password": "$2b$10$exampleHashedPassword2",
+      "balance": 500,
+      "role": "specialist",
+      "image": "doctor-avatar.png",
+      "status": "active",
+      "confirmEmail": true,
+      "sendCode": "123456",
+      "createdAt": {"$date": "2023-02-20T00:00:00Z"},
+      "updatedAt": {"$date": "2023-02-20T00:00:00Z"}
+    },
+    {
+      "_id": {"$oid": "651d3a41b4a37b5a18d4e003"},
+      "name": "Finance Manager",
+      "email": "manager@company.com",
+      "password": "$2b$10$exampleHashedPassword3",
+      "balance": 750,
+      "role": "maneger",
+      "image": "finance-manager.jpg",
+      "status": "pending ",
+      "confirmEmail": false,
+      "sendCode": "654321",
+      "createdAt": {"$date": "2023-03-10T00:00:00Z"},
+      "updatedAt": {"$date": "2023-03-10T00:00:00Z"}
+    },
+    {
+      "_id": {"$oid": "651d3a41b4a37b5a18d4e004"},
+      "name": "Patient Guardian",
+      "email": "guardian@family.org",
+      "password": "$2b$10$exampleHashedPassword4",
+      "balance": 200,
+      "role": "guardian",
+      "image": null,
+      "status": "active",
+      "confirmEmail": true,
+      "sendCode": null,
+      "createdAt": {"$date": "2023-04-05T00:00:00Z"},
+      "updatedAt": {"$date": "2023-04-05T00:00:00Z"}
+    }
+  ]
